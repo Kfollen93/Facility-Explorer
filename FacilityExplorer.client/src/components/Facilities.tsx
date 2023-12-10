@@ -155,8 +155,8 @@ function Facilities() {
       <SelectedFacilitiesList
         selectedFacilities={selectedFacilities}
         removeSelectedFacility={removeSelectedFacility}
+        handleGeneratePDF={handleGeneratePDF}
       />
-      <button onClick={handleGeneratePDF}>Download Selected PDF</button>
     </div>
   );
 
