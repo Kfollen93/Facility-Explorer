@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import Modal from "@mui/material/Modal";
-// import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 
 const style = {
@@ -28,12 +27,7 @@ const GenericModal: React.FC<GenericModalProps> = ({
 }) => {
   return (
     <Modal open={open} onClose={onClose}>
-      <Box sx={style}>
-        {anyComponent}
-        {/* <Button variant="contained" color="primary" onClick={onClose}>
-          Close
-        </Button> */}
-      </Box>
+      <Box sx={style}>{anyComponent}</Box>
     </Modal>
   );
 };
