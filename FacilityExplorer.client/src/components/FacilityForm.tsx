@@ -28,7 +28,9 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
 }) => {
   return (
     <form onSubmit={isEditing ? handleEditFacility : handleCreateFacility}>
-      {isEditing ? <h2>Update a Facility</h2> : <h2>Create a new Facility</h2>}
+      <div style={{ textAlign: "center" }}>
+        {isEditing ? <h2>View/Edit a Facility</h2> : <h2>Create a Facility</h2>}
+      </div>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
