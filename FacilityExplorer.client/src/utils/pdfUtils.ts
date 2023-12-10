@@ -6,8 +6,6 @@ import { getCurrentDateMonthDayYear } from "./dateFormats";
 
 async function generatePDF(selectedFacilities: Facility[]) {
   const doc = new jsPDF();
-
-  // Set font styles
   doc.setFont("helvetica", "normal");
   doc.setFontSize(12);
   doc.text(getCurrentDateMonthDayYear, 10, 10);
@@ -20,7 +18,7 @@ async function generatePDF(selectedFacilities: Facility[]) {
     );
 
     if (facilitiesOfType.length > 0) {
-      yPosition += 5; // Additional space
+      yPosition += 5;
 
       // Section header styling
       doc.setTextColor("#2196F3"); // Blue
@@ -30,7 +28,7 @@ async function generatePDF(selectedFacilities: Facility[]) {
 
       facilitiesOfType.forEach((facility) => {
         // Facility details styling
-        doc.setTextColor("#000000"); // Black
+        doc.setTextColor("#000000");
         doc.setFont("_", "normal").setFontSize(12);
         doc.text(`${facility.name}`, 20, yPosition);
         doc.text(
@@ -41,16 +39,18 @@ async function generatePDF(selectedFacilities: Facility[]) {
         doc.text(`Hours: ${facility.hours}`, 20, (yPosition += 4));
         doc.text(`Phone: ${facility.phoneNumber}`, 20, (yPosition += 4));
         doc.text(`Website: ${facility.websiteUrl}`, 20, (yPosition += 4));
-        doc.text(`Description: ${facility.description}`, 20, (yPosition += 4));
+        const splitDescription = doc.splitTextToSize(
+          `Description: ${facility.description}`,
+          160
+        );
+        doc.text(splitDescription, 20, (yPosition += 4));
 
-        // Add spacing between facilities
         yPosition += 8;
       });
 
-      // Add line separator after each section
-      doc.setDrawColor("#000000"); // Black color for the line separator
+      doc.setDrawColor("#000000");
       doc.line(10, yPosition, 200, yPosition);
-      yPosition += 5; // Additional space
+      yPosition += 5;
     }
   });
 
