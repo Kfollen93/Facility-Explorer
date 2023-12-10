@@ -178,6 +178,9 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                         >
                           {facility[headCell.id]}
                         </Link>
+                      ) : headCell.id === "description" &&
+                        facility.description.length > 30 ? (
+                        <span>{facility.description.substring(0, 30)}...</span>
                       ) : (
                         facility[headCell.id]
                       )}
