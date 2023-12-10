@@ -162,7 +162,7 @@ function Facilities() {
 
   return (
     <div>
-      <h1 id="tabelLabel">Facilities</h1>
+      <h2 id="tabelLabel">Facilities</h2>
       {contents}
     </div>
   );
