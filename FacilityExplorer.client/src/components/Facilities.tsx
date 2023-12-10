@@ -132,9 +132,6 @@ function Facilities() {
     </p>
   ) : (
     <div>
-      <Button variant="contained" onClick={openGenericModal}>
-        Create Facility
-      </Button>
       <GenericModal
         open={isGenericModalOpen}
         onClose={closeGenericModal}
@@ -153,6 +150,7 @@ function Facilities() {
         addSelectedFacility={addSelectedFacility}
         deleteFacility={deleteFacility}
         editFacility={editFacility}
+        createFacility={openGenericModal}
       />
       <SelectedFacilitiesList
         selectedFacilities={selectedFacilities}
@@ -164,7 +162,7 @@ function Facilities() {
 
   return (
     <div>
-      <h1 id="tabelLabel">Facilities</h1>
+      <h2 id="tabelLabel">Facilities</h2>
       {contents}
     </div>
   );
