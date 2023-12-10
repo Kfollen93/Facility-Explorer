@@ -16,12 +16,14 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 
 interface FacilitiesListProps {
   facilities: Facility[] | undefined;
   addSelectedFacility: (id: number) => void;
   deleteFacility: (id: number) => void;
   editFacility: (id: number) => void;
+  createFacility: () => void;
 }
 
 interface HeadCell {
@@ -46,6 +48,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   addSelectedFacility,
   deleteFacility,
   editFacility,
+  createFacility,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
@@ -105,13 +108,33 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
         padding: "16px",
       }}
     >
-      <TextField
-        label="Search..."
-        size="small"
-        variant="outlined"
-        value={searchTerm}
-        onChange={handleSearchChange}
-      />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <TextField
+          style={{ marginRight: "8px", paddingLeft: "8px" }}
+          label="Search..."
+          size="small"
+          variant="outlined"
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
+        <Button
+          variant="contained"
+          size="small"
+          style={{
+            marginLeft: "945px",
+            minWidth: "25px",
+            height: "25px",
+          }}
+          onClick={createFacility}
+        >
+          <AddBusinessIcon />
+        </Button>
+      </div>
       <TableContainer style={{ maxHeight: "600px", overflowY: "auto" }}>
         <Table stickyHeader={true}>
           <TableHead>
