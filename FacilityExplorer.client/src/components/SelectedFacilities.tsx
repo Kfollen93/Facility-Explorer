@@ -29,7 +29,7 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
             borderRadius: "5px",
             width: "600px",
             marginLeft: "340px",
-            marginBottom: "20px", // Adjust the marginBottom as needed
+            marginBottom: "20px",
           }}
         >
           <List style={{ flex: 1, width: "100%" }}>
