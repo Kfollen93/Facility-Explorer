@@ -17,6 +17,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
+import { formatPhoneNumber } from "../utils/phoneNumberUtils";
 
 interface FacilitiesListProps {
   facilities: Facility[] | undefined;
@@ -181,6 +182,8 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                       ) : headCell.id === "description" &&
                         facility.description.length > 30 ? (
                         <span>{facility.description.substring(0, 30)}...</span>
+                      ) : headCell.id === "phoneNumber" ? (
+                        formatPhoneNumber(facility[headCell.id] as string)
                       ) : (
                         facility[headCell.id]
                       )}

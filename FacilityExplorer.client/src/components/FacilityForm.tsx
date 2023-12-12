@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FacilityRequest } from "../services/facilityService";
 import {
   TextField,
@@ -10,6 +10,7 @@ import {
   Grid,
 } from "@mui/material";
 import { facilityTypes } from "../utils/facilityTypes";
+import { formatPhoneNumber, phoneNumberRegex } from "../utils/phoneNumberUtils";
 
 interface FacilityFormProps {
   newFacility: FacilityRequest;
@@ -26,8 +27,30 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
   isEditing,
   handleEditFacility,
 }) => {
+  const [phoneNumberError, setPhoneNumberError] = useState<string | null>(null);
+
+  const validatePhoneNumber = (value: string) => {
+    if (!phoneNumberRegex.test(value)) {
+      setPhoneNumberError("Invalid phone number format.");
+    } else {
+      setPhoneNumberError(null);
+    }
+  };
+
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    validatePhoneNumber(value);
+    handleInputChange("phoneNumber", value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (phoneNumberError) return;
+    isEditing ? await handleEditFacility(e) : await handleCreateFacility(e);
+  };
+
   return (
-    <form onSubmit={isEditing ? handleEditFacility : handleCreateFacility}>
+    <form onSubmit={handleSubmit}>
       <div style={{ textAlign: "center" }}>
         {isEditing ? <h2>View/Edit a Facility</h2> : <h2>Create a Facility</h2>}
       </div>
@@ -83,11 +106,13 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
           <TextField
             label="Phone Number"
             type="tel"
-            helperText="Format: xxx-xxx-xxxx"
             fullWidth
             required
-            value={newFacility.phoneNumber}
-            onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
+            placeholder="(xxx) xxx-xxxx"
+            value={formatPhoneNumber(newFacility.phoneNumber)}
+            onChange={handlePhoneNumberChange}
+            error={Boolean(phoneNumberError)}
+            helperText={phoneNumberError}
           />
         </Grid>
         <Grid item xs={12}>
