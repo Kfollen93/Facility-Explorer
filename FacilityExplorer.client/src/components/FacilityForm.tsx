@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { facilityTypes } from "../utils/facilityTypes";
 import { formatPhoneNumber, phoneNumberRegex } from "../utils/phoneNumberUtils";
+import { addressRegex } from "../utils/addressUtils";
 
 interface FacilityFormProps {
   newFacility: FacilityRequest;
@@ -28,6 +29,7 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
   handleEditFacility,
 }) => {
   const [phoneNumberError, setPhoneNumberError] = useState<string | null>(null);
+  const [addressError, setAddressError] = useState<string | null>(null);
 
   const validatePhoneNumber = (value: string) => {
     if (!phoneNumberRegex.test(value)) {
@@ -43,9 +45,24 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
     handleInputChange("phoneNumber", value);
   };
 
+  const validateAddress = (value: string) => {
+    if (!addressRegex.test(value)) {
+      setAddressError("Invalid address format");
+    } else {
+      setAddressError(null);
+    }
+  };
+
+  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    validateAddress(value);
+    handleInputChange("fullAddress", value);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (phoneNumberError) return;
+    if (addressError) return;
     isEditing ? await handleEditFacility(e) : await handleCreateFacility(e);
   };
 
@@ -88,8 +105,11 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
             type="text"
             fullWidth
             required
-            value={newFacility.fullAddress}
-            onChange={(e) => handleInputChange("fullAddress", e.target.value)}
+            placeholder="123 Ez Street, Coolville, WA 98101"
+            value={formatPhoneNumber(newFacility.fullAddress)}
+            onChange={handleAddressChange}
+            error={Boolean(addressError)}
+            helperText={addressError}
           />
         </Grid>
         <Grid item xs={12}>
