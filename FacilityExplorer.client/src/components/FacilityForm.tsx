@@ -31,28 +31,20 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
   const [phoneNumberError, setPhoneNumberError] = useState<string | null>(null);
   const [addressError, setAddressError] = useState<string | null>(null);
 
-  const validatePhoneNumber = (value: string) => {
-    if (!phoneNumberRegex.test(value)) {
-      setPhoneNumberError("Invalid phone number format.");
-    } else {
-      setPhoneNumberError(null);
-    }
-  };
-
+  const validatePhoneNumber = (value: string) =>
+    setPhoneNumberError(
+      !phoneNumberRegex.test(value) ? "Invalid phone number format." : null
+    );
   const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     validatePhoneNumber(value);
     handleInputChange("phoneNumber", value);
   };
 
-  const validateAddress = (value: string) => {
-    if (!addressRegex.test(value)) {
-      setAddressError("Invalid address format");
-    } else {
-      setAddressError(null);
-    }
-  };
-
+  const validateAddress = (value: string) =>
+    setAddressError(
+      !addressRegex.test(value) ? "Invalid address format." : null
+    );
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     validateAddress(value);
