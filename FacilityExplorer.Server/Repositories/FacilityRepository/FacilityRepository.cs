@@ -13,6 +13,11 @@ namespace FacilityExplorer.Server.Repositories.FacilityRepository
 
         public async Task<Facility> CreateFacilityAsync(FacilityRequest facilityCreateRequest)
         {
+            if (!AddressUtility.IsAddressFormatValid(facilityCreateRequest.FullAddress))
+            {
+                throw new InvalidOperationException("Invalid address format");
+            }
+
             var facility = new Facility()
             {
                 Name = facilityCreateRequest.Name,
@@ -51,6 +56,11 @@ namespace FacilityExplorer.Server.Repositories.FacilityRepository
         {
             var existingFacility = await _db.Facilities.FirstOrDefaultAsync(x => x.Id == id);
             if (existingFacility is null) return null;
+
+            if (!AddressUtility.IsAddressFormatValid(facilityUpdateRequest.FullAddress))
+            {
+                throw new InvalidOperationException("Invalid address format");
+            }
 
             existingFacility.Name = facilityUpdateRequest.Name;
             existingFacility.TypeOfFacility = facilityUpdateRequest.TypeOfFacility;

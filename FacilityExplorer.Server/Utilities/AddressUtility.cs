@@ -1,9 +1,18 @@
 ﻿using FacilityExplorer.Server.Models;
+using System.Text.RegularExpressions;
 
 namespace FacilityExplorer.Server.Utilities
 {
     public static class AddressUtility
     {
+        public static bool IsAddressFormatValid(string fullAddress)
+        {
+            var addressParts = fullAddress?.Trim().Split(',');
+            if (addressParts == null || addressParts.Length != 3) return false;
+            var stateZip = addressParts[2]?.Trim().Split(' ');
+            return stateZip != null && stateZip.Length == 2 && Regex.IsMatch(stateZip[1], @"^\d{5}$");
+        }
+
         public static Address CreateAddress(string fullAddress)
         {
             var addressParts = fullAddress.Trim().Split(',');
