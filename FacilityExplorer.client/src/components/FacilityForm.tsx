@@ -51,10 +51,17 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
     handleInputChange("fullAddress", value);
   };
 
+  const potentialErrors: Array<string | null> = [
+    phoneNumberError,
+    addressError,
+  ];
+  const hasErrors = potentialErrors.some(
+    (err) => err !== null && err !== undefined
+  );
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (phoneNumberError) return;
-    if (addressError) return;
+    if (hasErrors) return;
     isEditing ? await handleEditFacility(e) : await handleCreateFacility(e);
   };
 
