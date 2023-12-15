@@ -125,7 +125,7 @@ namespace FacilityExplorer.Tests.Controllers
         {
             // Act
             var result = await _facilityController.DeleteFacilityAsync(-1);
-            var notFoundResult = (NotFoundResult)result;
+            var notFoundResult = (NotFoundObjectResult)result;
 
             // Assert
             Assert.Equal(404, notFoundResult.StatusCode);
