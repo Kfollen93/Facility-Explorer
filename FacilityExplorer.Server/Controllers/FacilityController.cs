@@ -22,21 +22,21 @@ namespace FacilityExplorer.Server.Controllers
         public async Task<IActionResult> CreateFacilityAsync([FromBody] FacilityRequest facilityRequest)
         {
             var createdFacility = await _facilityService.CreateFacilityAsync(facilityRequest);
-            return Ok(createdFacility);
+            return createdFacility is null ? BadRequest("Invalid address format.") : Ok(createdFacility);
         }
 
         [HttpDelete("facility/{id}")]
         public async Task<IActionResult> DeleteFacilityAsync(int id)
         {
             var facilityToDelete = await _facilityService.DeleteFacilityAsync(id);
-            return facilityToDelete is null ? NotFound() : Ok(facilityToDelete);
+            return facilityToDelete is null ? NotFound($"The facility with an id of {id} does not exist.") : Ok(facilityToDelete);
         }
 
         [HttpPut("facility/{id}")]
         public async Task<IActionResult> UpdateFacilityAsync(int id, [FromBody] FacilityRequest facilityRequest)
         {
             var updatedFacility = await _facilityService.UpdateFacilityAsync(id, facilityRequest);
-            return updatedFacility is null ? NotFound() : Ok(updatedFacility);
+            return updatedFacility is null ? NotFound($"The facility with an id of {id} does not exist.") : Ok(updatedFacility);
         }
     }
 }

@@ -52,17 +52,10 @@ function Facilities() {
     e.preventDefault();
     console.log("Creating facility with data:", newFacility);
 
-    const createdFacility = await facilityService.createFacility(newFacility);
-
-    if (createdFacility !== undefined) {
-      console.log("Created Facility:", createdFacility);
-      setNewFacility(defaultFacilityRequest);
-      await getFacilities();
-      closeGenericModal();
-    } else {
-      // Logging for now, should display to user.
-      console.error("Failed to create facility. Please check your input.");
-    }
+    await facilityService.createFacility(newFacility);
+    setNewFacility(defaultFacilityRequest);
+    await getFacilities();
+    closeGenericModal();
   };
 
   const deleteFacility = async (id: number) => {

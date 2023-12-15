@@ -11,12 +11,9 @@ namespace FacilityExplorer.Server.Repositories.FacilityRepository
         private readonly DataContext _db;
         public FacilityRepository(DataContext dataContext) => _db = dataContext;
 
-        public async Task<Facility> CreateFacilityAsync(FacilityRequest facilityCreateRequest)
+        public async Task<Facility?> CreateFacilityAsync(FacilityRequest facilityCreateRequest)
         {
-            if (!AddressUtility.IsAddressFormatValid(facilityCreateRequest.FullAddress))
-            {
-                throw new InvalidOperationException("Invalid address format");
-            }
+            if (!AddressUtility.IsAddressFormatValid(facilityCreateRequest.FullAddress)) return null;
 
             var facility = new Facility()
             {
