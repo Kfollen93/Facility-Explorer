@@ -127,9 +127,9 @@ function Facilities() {
     <p>Loading facilities...</p>
   ) : facilities === undefined ? (
     <p>
-      <Button variant="contained" onClick={getFacilities}>
+      {/* <Button variant="contained" onClick={getFacilities}>
         Refresh Facilities
-      </Button>
+      </Button> */}
     </p>
   ) : (
     <div>
