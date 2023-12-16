@@ -9,7 +9,7 @@ import FacilityForm from "./FacilityForm";
 import SelectedFacilitiesList from "./SelectedFacilities";
 import generatePDF from "../utils/pdfUtils";
 import GenericModal from "./GenericModal";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
 function Facilities() {
   const [facilities, setFacilities] = useState<Facility[] | undefined>(
