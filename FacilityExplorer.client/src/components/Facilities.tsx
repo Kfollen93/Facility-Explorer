@@ -9,7 +9,7 @@ import FacilityForm from "./FacilityForm";
 import SelectedFacilitiesList from "./SelectedFacilities";
 import generatePDF from "../utils/pdfUtils";
 import GenericModal from "./GenericModal";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 function Facilities() {
   const [facilities, setFacilities] = useState<Facility[] | undefined>(
@@ -23,6 +23,7 @@ function Facilities() {
   const [isGenericModalOpen, setIsGenericModalOpen] = useState<boolean>(false);
   const [editingFacilityId, setEditingFacilityId] = useState<number>(-1);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     getFacilities();
@@ -145,13 +146,17 @@ function Facilities() {
           />
         }
       />
-      <FacilitiesList
-        facilities={facilities}
-        addSelectedFacility={addSelectedFacility}
-        deleteFacility={deleteFacility}
-        editFacility={editFacility}
-        createFacility={openGenericModal}
-      />
+      {searchTerm !== "" && (
+        <FacilitiesList
+          facilities={facilities}
+          addSelectedFacility={addSelectedFacility}
+          deleteFacility={deleteFacility}
+          editFacility={editFacility}
+          createFacility={openGenericModal}
+          searchTerm={searchTerm}
+          handleSearchChange={(event) => setSearchTerm(event.target.value)}
+        />
+      )}
       <SelectedFacilitiesList
         selectedFacilities={selectedFacilities}
         removeSelectedFacility={removeSelectedFacility}
@@ -163,6 +168,21 @@ function Facilities() {
   return (
     <div>
       <h2 id="tabelLabel">Facilities</h2>
+
+      <div style={{ marginBottom: "16px" }}>
+        <TextField
+          label="Search..."
+          size="small"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+        />
+        {/* <Button variant="contained" onClick={getFacilities}>
+          Refresh Facilities
+        </Button> */}
+      </div>
       {contents}
     </div>
   );

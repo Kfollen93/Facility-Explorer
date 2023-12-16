@@ -10,7 +10,6 @@ import {
   TableRow,
   TableSortLabel,
   TablePagination,
-  TextField,
   Link,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -25,6 +24,8 @@ interface FacilitiesListProps {
   deleteFacility: (id: number) => void;
   editFacility: (id: number) => void;
   createFacility: () => void;
+  searchTerm: string;
+  handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface HeadCell {
@@ -50,12 +51,12 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   deleteFacility,
   editFacility,
   createFacility,
+  searchTerm,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleRequestSort = (property: keyof Facility) => {
     const isAsc = orderBy === property && order === "asc";
@@ -72,10 +73,6 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
   };
 
   const filteredFacilities = React.useMemo(() => {
@@ -115,14 +112,6 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           alignItems: "center",
         }}
       >
-        <TextField
-          style={{ marginRight: "8px", paddingLeft: "8px" }}
-          label="Search..."
-          size="small"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
         <Button
           variant="contained"
           size="small"
