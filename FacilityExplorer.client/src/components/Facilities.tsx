@@ -137,13 +137,13 @@ function Facilities() {
   };
 
   const renderFilterButtons = () => {
-    return Object.entries(facilityTypes).map(([abbrevType, fullType]) => (
+    return Object.entries(facilityTypes).map(([facilityType]) => (
       <Button
-        key={abbrevType}
+        key={facilityType}
         variant="contained"
-        onClick={() => filterSubTableByType(abbrevType)}
+        onClick={() => filterSubTableByType(facilityType)}
       >
-        {fullType}
+        {facilityType}
       </Button>
     ));
   };
