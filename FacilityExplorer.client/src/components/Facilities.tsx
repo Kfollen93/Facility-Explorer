@@ -9,12 +9,17 @@ import FacilityForm from "./FacilityForm";
 import SelectedFacilitiesList from "./SelectedFacilities";
 import generatePDF from "../utils/pdfUtils";
 import GenericModal from "./GenericModal";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { facilityTypes } from "../utils/facilityTypes";
 
 function Facilities() {
   const [facilities, setFacilities] = useState<Facility[] | undefined>(
     undefined
   );
+  const [copyOfFacilities, setCopyOfFacilities] = useState<
+    Facility[] | undefined
+  >(undefined);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [newFacility, setNewFacility] = useState<FacilityRequest>(
     defaultFacilityRequest
@@ -35,6 +40,7 @@ function Facilities() {
       const data = await facilityService.getFacilities();
       if (data !== undefined) {
         setFacilities(data);
+        setCopyOfFacilities(data);
       }
     } finally {
       setLoading(false);
@@ -123,6 +129,25 @@ function Facilities() {
     generatePDF(selectedFacilities);
   };
 
+  const filterSubTableByType = (facilityType: string) => {
+    const filteredFacilities = copyOfFacilities?.filter(
+      (facility) => facility.typeOfFacility === facilityType
+    );
+    setFacilities(filteredFacilities);
+  };
+
+  const renderFilterButtons = () => {
+    return Object.entries(facilityTypes).map(([abbrevType, fullType]) => (
+      <Button
+        key={abbrevType}
+        variant="contained"
+        onClick={() => filterSubTableByType(abbrevType)}
+      >
+        {fullType}
+      </Button>
+    ));
+  };
+
   const contents = loading ? (
     <p>Loading facilities...</p>
   ) : facilities === undefined ? (
@@ -146,17 +171,17 @@ function Facilities() {
           />
         }
       />
-      {searchTerm !== "" && (
-        <FacilitiesList
-          facilities={facilities}
-          addSelectedFacility={addSelectedFacility}
-          deleteFacility={deleteFacility}
-          editFacility={editFacility}
-          createFacility={openGenericModal}
-          searchTerm={searchTerm}
-          handleSearchChange={(event) => setSearchTerm(event.target.value)}
-        />
-      )}
+      <>{renderFilterButtons()}</>
+      <FacilitiesList
+        facilities={facilities}
+        addSelectedFacility={addSelectedFacility}
+        deleteFacility={deleteFacility}
+        editFacility={editFacility}
+        createFacility={openGenericModal}
+        searchTerm={searchTerm}
+        handleSearchChange={(event) => setSearchTerm(event.target.value)}
+      />
+
       <SelectedFacilitiesList
         selectedFacilities={selectedFacilities}
         removeSelectedFacility={removeSelectedFacility}
