@@ -27,6 +27,8 @@ interface FacilitiesListProps {
   searchTerm: string;
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   borderColor: string;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
 }
 
 interface HeadCell {
@@ -54,10 +56,11 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   createFacility,
   searchTerm,
   borderColor,
+  setPage,
+  page,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
-  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const handleRequestSort = (property: keyof Facility) => {

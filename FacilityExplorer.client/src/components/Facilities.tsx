@@ -33,6 +33,7 @@ function Facilities() {
   const [borderColor, setBorderColor] = useState<string>(muiBlueColor); // Blue MUI color
   const [filterButtonClicked, setFilterButtonClicked] =
     useState<boolean>(false);
+  const [page, setPage] = React.useState(0);
 
   useEffect(() => {
     getFacilities();
@@ -138,6 +139,7 @@ function Facilities() {
       );
       setFacilities(filteredFacilities);
     }
+    setPage(0); // Reset table page when clicking new tab.
     setFilterButtonClicked(true);
   };
 
@@ -215,6 +217,8 @@ function Facilities() {
           searchTerm={searchTerm}
           handleSearchChange={(event) => setSearchTerm(event.target.value)}
           borderColor={borderColor}
+          setPage={setPage}
+          page={page}
         />
       ) : (
         ""
