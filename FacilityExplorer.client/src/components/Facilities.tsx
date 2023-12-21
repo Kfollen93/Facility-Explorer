@@ -29,7 +29,8 @@ function Facilities() {
   const [editingFacilityId, setEditingFacilityId] = useState<number>(-1);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [borderColor, setBorderColor] = useState<string>("#1976d2"); // Blue MUI color
+  const muiBlueColor = "#1976d2";
+  const [borderColor, setBorderColor] = useState<string>(muiBlueColor); // Blue MUI color
 
   useEffect(() => {
     getFacilities();
@@ -145,10 +146,10 @@ function Facilities() {
         <div style={{ marginBottom: "10px" }}>
           <Button
             variant="contained"
-            style={{ backgroundColor: "#1976d2", marginRight: "10px" }}
+            style={{ backgroundColor: muiBlueColor, marginRight: "10px" }}
             onClick={() => {
               filterSubTableByType("All");
-              setBorderColor("#1976d2");
+              setBorderColor(muiBlueColor);
             }}
           >
             All
@@ -160,12 +161,12 @@ function Facilities() {
               style={{
                 marginRight: "10px",
                 backgroundColor:
-                  facilityType === "All" ? "#1976d2" : buttonColors[index], // Set black color for "All", use the array for others
+                  facilityType === "All" ? muiBlueColor : buttonColors[index],
               }}
               onClick={() => {
                 filterSubTableByType(facilityType);
                 setBorderColor(
-                  facilityType === "All" ? "#1976d2" : buttonColors[index]
+                  facilityType === "All" ? muiBlueColor : buttonColors[index]
                 );
               }}
             >
