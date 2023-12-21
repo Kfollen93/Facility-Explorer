@@ -130,22 +130,33 @@ function Facilities() {
   };
 
   const filterSubTableByType = (facilityType: string) => {
-    const filteredFacilities = copyOfFacilities?.filter(
-      (facility) => facility.typeOfFacility === facilityType
-    );
-    setFacilities(filteredFacilities);
+    if (facilityType === "All") {
+      setFacilities(copyOfFacilities);
+    } else {
+      const filteredFacilities = copyOfFacilities?.filter(
+        (facility) => facility.typeOfFacility === facilityType
+      );
+      setFacilities(filteredFacilities);
+    }
   };
 
   const renderFilterButtons = () => {
-    return Object.entries(facilityTypes).map(([facilityType]) => (
-      <Button
-        key={facilityType}
-        variant="contained"
-        onClick={() => filterSubTableByType(facilityType)}
-      >
-        {facilityType}
-      </Button>
-    ));
+    return (
+      <>
+        <Button variant="contained" onClick={() => filterSubTableByType("All")}>
+          All
+        </Button>
+        {Object.entries(facilityTypes).map(([facilityType]) => (
+          <Button
+            key={facilityType}
+            variant="contained"
+            onClick={() => filterSubTableByType(facilityType)}
+          >
+            {facilityType}
+          </Button>
+        ))}
+      </>
+    );
   };
 
   const contents = loading ? (
