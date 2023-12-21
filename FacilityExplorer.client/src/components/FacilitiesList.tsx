@@ -26,6 +26,7 @@ interface FacilitiesListProps {
   createFacility: () => void;
   searchTerm: string;
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  borderColor: string;
 }
 
 interface HeadCell {
@@ -52,6 +53,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   editFacility,
   createFacility,
   searchTerm,
+  borderColor,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
@@ -102,7 +104,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
       style={{
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
-        border: "1px solid #e0e0e0",
+        border: `8px solid ${borderColor}`,
         padding: "16px",
       }}
     >

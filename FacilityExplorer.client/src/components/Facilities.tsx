@@ -29,6 +29,7 @@ function Facilities() {
   const [editingFacilityId, setEditingFacilityId] = useState<number>(-1);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [borderColor, setBorderColor] = useState<string>("#1976d2"); // Blue MUI color
 
   useEffect(() => {
     getFacilities();
@@ -137,20 +138,41 @@ function Facilities() {
   };
 
   const renderFilterButtons = () => {
+    const buttonColors = ["#9DA9A0", "#654C4F", "#CEC075"];
+
     return (
       <>
-        <Button variant="contained" onClick={() => filterSubTableByType("All")}>
-          All
-        </Button>
-        {Object.entries(facilityTypes).map(([facilityType]) => (
+        <div style={{ marginBottom: "10px" }}>
           <Button
-            key={facilityType}
             variant="contained"
-            onClick={() => filterSubTableByType(facilityType)}
+            style={{ backgroundColor: "#1976d2", marginRight: "10px" }}
+            onClick={() => {
+              filterSubTableByType("All");
+              setBorderColor("#1976d2");
+            }}
           >
-            {facilityType}
+            All
           </Button>
-        ))}
+          {Object.entries(facilityTypes).map(([facilityType], index) => (
+            <Button
+              key={facilityType}
+              variant="contained"
+              style={{
+                marginRight: "10px",
+                backgroundColor:
+                  facilityType === "All" ? "#1976d2" : buttonColors[index], // Set black color for "All", use the array for others
+              }}
+              onClick={() => {
+                filterSubTableByType(facilityType);
+                setBorderColor(
+                  facilityType === "All" ? "#1976d2" : buttonColors[index]
+                );
+              }}
+            >
+              {facilityType}
+            </Button>
+          ))}
+        </div>
       </>
     );
   };
@@ -179,15 +201,20 @@ function Facilities() {
         }
       />
       <>{renderFilterButtons()}</>
-      <FacilitiesList
-        facilities={facilities}
-        addSelectedFacility={addSelectedFacility}
-        deleteFacility={deleteFacility}
-        editFacility={editFacility}
-        createFacility={openGenericModal}
-        searchTerm={searchTerm}
-        handleSearchChange={(event) => setSearchTerm(event.target.value)}
-      />
+      {searchTerm !== "" ? (
+        <FacilitiesList
+          facilities={facilities}
+          addSelectedFacility={addSelectedFacility}
+          deleteFacility={deleteFacility}
+          editFacility={editFacility}
+          createFacility={openGenericModal}
+          searchTerm={searchTerm}
+          handleSearchChange={(event) => setSearchTerm(event.target.value)}
+          borderColor={borderColor}
+        />
+      ) : (
+        ""
+      )}
 
       <SelectedFacilitiesList
         selectedFacilities={selectedFacilities}
