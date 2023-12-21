@@ -31,6 +31,8 @@ function Facilities() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const muiBlueColor = "#1976d2";
   const [borderColor, setBorderColor] = useState<string>(muiBlueColor); // Blue MUI color
+  const [filterButtonClicked, setFilterButtonClicked] =
+    useState<boolean>(false);
 
   useEffect(() => {
     getFacilities();
@@ -136,6 +138,7 @@ function Facilities() {
       );
       setFacilities(filteredFacilities);
     }
+    setFilterButtonClicked(true);
   };
 
   const renderFilterButtons = () => {
@@ -202,7 +205,7 @@ function Facilities() {
         }
       />
       <>{renderFilterButtons()}</>
-      {searchTerm !== "" ? (
+      {searchTerm !== "" || filterButtonClicked ? (
         <FacilitiesList
           facilities={facilities}
           addSelectedFacility={addSelectedFacility}
