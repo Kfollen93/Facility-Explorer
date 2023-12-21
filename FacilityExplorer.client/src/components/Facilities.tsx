@@ -48,7 +48,6 @@ function Facilities() {
   };
 
   const handleInputChange = (field: string, value: string) => {
-    console.log("handleinputchange");
     setNewFacility((prevFacility) => ({
       ...prevFacility,
       [field]: value,
@@ -57,8 +56,6 @@ function Facilities() {
 
   const handleCreateFacility = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Creating facility with data:", newFacility);
-
     await facilityService.createFacility(newFacility);
     setNewFacility(defaultFacilityRequest);
     await getFacilities();
@@ -116,7 +113,6 @@ function Facilities() {
   };
 
   const openGenericModal = () => {
-    console.log("modal opened");
     setIsGenericModalOpen(true);
   };
 
