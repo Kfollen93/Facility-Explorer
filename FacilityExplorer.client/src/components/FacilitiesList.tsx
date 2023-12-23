@@ -160,12 +160,10 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                   )}
                 </TableCell>
               ))}
-              <TableCell style={{ backgroundColor: "#ddbea9" }}>
-                Select
-              </TableCell>
-              <TableCell style={{ backgroundColor: "#ddbea9" }}>Edit</TableCell>
-              <TableCell style={{ backgroundColor: "#ddbea9" }}>
-                Delete
+              <TableCell
+                style={{ backgroundColor: "#ddbea9", fontWeight: "bold" }}
+              >
+                Actions
               </TableCell>
             </TableRow>
           </TableHead>
@@ -199,45 +197,42 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                       )}
                     </TableCell>
                   ))}
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      style={{
-                        minWidth: "25px",
-                        height: "25px",
-                      }}
-                      onClick={() => addSelectedFacility(facility.id)}
-                    >
-                      <AddIcon />
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      style={{
-                        minWidth: "25px",
-                        height: "25px",
-                      }}
-                      onClick={() => editFacility(facility.id)}
-                    >
-                      <EditIcon fontSize="small" />
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      style={{
-                        minWidth: "25px",
-                        height: "25px",
-                      }}
-                      onClick={() => deleteFacility(facility.id)}
-                    >
-                      <DeleteIcon />
-                    </Button>
-                  </TableCell>
+
+                  <Button
+                    variant="contained"
+                    size="small"
+                    style={{
+                      minWidth: "25px",
+                      height: "25px",
+                    }}
+                    onClick={() => addSelectedFacility(facility.id)}
+                  >
+                    <AddIcon />
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    size="small"
+                    style={{
+                      minWidth: "25px",
+                      height: "25px",
+                    }}
+                    onClick={() => editFacility(facility.id)}
+                  >
+                    <EditIcon fontSize="small" />
+                  </Button>
+
+                  <Button
+                    variant="contained"
+                    size="small"
+                    style={{
+                      minWidth: "25px",
+                      height: "25px",
+                    }}
+                    onClick={() => deleteFacility(facility.id)}
+                  >
+                    <DeleteIcon />
+                  </Button>
                 </TableRow>
               ))}
           </TableBody>
