@@ -109,6 +109,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
         borderRadius: "8px",
         border: `8px solid ${borderColor}`,
         padding: "16px",
+        backgroundColor: "#6b705c", // Space between border and table.
       }}
     >
       <div
@@ -130,12 +131,20 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           <AddBusinessIcon />
         </Button>
       </div>
-      <TableContainer style={{ maxHeight: "600px", overflowY: "auto" }}>
+      <TableContainer
+        style={{
+          maxHeight: "600px",
+          overflowY: "auto",
+        }}
+      >
         <Table stickyHeader={true}>
           <TableHead>
             <TableRow>
               {headerCells.map((headCell) => (
-                <TableCell key={headCell.id}>
+                <TableCell
+                  key={headCell.id}
+                  style={{ backgroundColor: "#ddbea9", fontWeight: "bold" }} // Header row.
+                >
                   {["name", "typeOfFacility", "insurance"].includes(
                     headCell.id
                   ) ? (
@@ -151,18 +160,25 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                   )}
                 </TableCell>
               ))}
-              <TableCell>Select</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell style={{ backgroundColor: "#ddbea9" }}>
+                Select
+              </TableCell>
+              <TableCell style={{ backgroundColor: "#ddbea9" }}>Edit</TableCell>
+              <TableCell style={{ backgroundColor: "#ddbea9" }}>
+                Delete
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {sortedFacilities
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((facility) => (
-                <TableRow key={facility.id}>
+                <TableRow
+                  key={facility.id}
+                  style={{ backgroundColor: "#b7b7a4" }} // Body of table data.
+                >
                   {headerCells.map((headCell) => (
-                    <TableCell key={headCell.id}>
+                    <TableCell key={headCell.id} style={{ fontWeight: "bold" }}>
                       {headCell.id === "address" ? (
                         `${facility.address.street}, ${facility.address.city}, ${facility.address.state} ${facility.address.zipcode}`
                       ) : headCell.id === "websiteUrl" ? (

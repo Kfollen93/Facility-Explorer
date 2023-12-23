@@ -184,13 +184,20 @@ function Facilities() {
   };
 
   const contents = loading ? (
-    <p>Loading facilities...</p>
-  ) : facilities === undefined ? (
     <p>
-      {/* <Button variant="contained" onClick={getFacilities}>
-        Refresh Facilities
-      </Button> */}
+      <i>Loading facilities...</i>
     </p>
+  ) : facilities === undefined ? (
+    <div>
+      <i>
+        Try to refresh, but please note the server may be down for development.
+      </i>
+      <p>
+        <Button variant="contained" onClick={getFacilities}>
+          Refresh Facilities
+        </Button>
+      </p>
+    </div>
   ) : (
     <div>
       <GenericModal
