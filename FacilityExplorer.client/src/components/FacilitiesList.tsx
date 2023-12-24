@@ -109,7 +109,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
         borderRadius: "8px",
         border: `8px solid ${borderColor}`,
         padding: "16px",
-        backgroundColor: "#6b705c", // Space between border and table.
+        backgroundColor: "#96a5b3", // Space between border and table.
       }}
     >
       <div
@@ -143,7 +143,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
               {headerCells.map((headCell) => (
                 <TableCell
                   key={headCell.id}
-                  style={{ backgroundColor: "#ddbea9", fontWeight: "bold" }} // Header row.
+                  style={{ backgroundColor: "#fffaf5", fontWeight: "bold" }} // Header row.
                 >
                   {["name", "typeOfFacility", "insurance"].includes(
                     headCell.id
@@ -161,7 +161,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                 </TableCell>
               ))}
               <TableCell
-                style={{ backgroundColor: "#ddbea9", fontWeight: "bold" }}
+                style={{ backgroundColor: "#fffaf5", fontWeight: "bold" }}
               >
                 Actions
               </TableCell>
@@ -173,7 +173,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
               .map((facility) => (
                 <TableRow
                   key={facility.id}
-                  style={{ backgroundColor: "#b7b7a4" }} // Body of table data.
+                  style={{ backgroundColor: "#d6ecff" }} // Body of table data.
                 >
                   {headerCells.map((headCell) => (
                     <TableCell key={headCell.id} style={{ fontWeight: "bold" }}>
