@@ -3,8 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  background-color: #ffe8d6;
-  border-radius: 5%;
+  /* background-color: #ffffff; */
+  border-radius: 16px;
   padding-bottom: 3rem;
 }
 
@@ -22,10 +22,10 @@ td {
 }
 
 body {
-  background-color: #6d5e4f;
+  background-color: #f8f8f8;
   background-image: url("/images/subtlebg.png");
   background-size: cover;
-  background-blend-mode: overlay;
+  /* background-blend-mode: overlay; */
 }
 
 /* Media query for smaller screens */
