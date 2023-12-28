@@ -103,10 +103,11 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   return (
     <div
       style={{
-        boxShadow: "0px 8px 8px rgba(0, 0, 0, 0.2)",
+        boxShadow:
+          "0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 4px rgba(0, 0, 0, 0.2) inset",
         borderRadius: "8px",
         padding: "8px",
-        backgroundColor: "#556D85", // Space between border and table.
+        // backgroundColor: "", // Space between border and table.
       }}
     >
       <div
@@ -223,6 +224,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                           style={{
                             minWidth: "15px",
                             height: "15px",
+                            color: "#1eb3a4",
                           }}
                           onClick={() => addSelectedFacility(facility.id)}
                         >
@@ -234,6 +236,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                           style={{
                             minWidth: "15px",
                             height: "15px",
+                            color: "#1eb3a4",
                           }}
                           onClick={() => editFacility(facility.id)}
                         >
@@ -247,6 +250,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                           minWidth: "15px",
                           height: "15px",
                           marginTop: "5px",
+                          color: "#1eb3a4",
                         }}
                         onClick={() => deleteFacility(facility.id)}
                       >
