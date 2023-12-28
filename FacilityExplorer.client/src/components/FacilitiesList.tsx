@@ -108,8 +108,8 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
         // boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
         // border: `8px solid ${borderColor}`,
-        padding: "16px",
-        // backgroundColor: "#355C7D", // Space between border and table.
+        padding: "8px",
+        backgroundColor: "#FFFFFF", // Space between border and table.
       }}
     >
       <div
@@ -133,10 +133,10 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
       </div>
       <TableContainer
         style={{
-          maxHeight: "600px",
+          maxHeight: "500px",
           overflowY: "auto",
           borderRadius: "8px",
-          boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+          // boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Remove box shadow to make it look like one table.
           //border: `4px solid ${borderColor}`,
         }}
       >
@@ -147,9 +147,9 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                 <TableCell
                   key={headCell.id}
                   style={{
-                    backgroundColor: "#F67280",
+                    backgroundColor: "#FFFFFF",
                     fontWeight: "bold",
-                    color: "#FFFFFF",
+                    color: "#1eb3a4",
                   }} // Header row.
                 >
                   {["name", "typeOfFacility", "insurance"].includes(
@@ -169,9 +169,9 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
               ))}
               <TableCell
                 style={{
-                  backgroundColor: "#F67280",
+                  backgroundColor: "#FFFFFF",
                   fontWeight: "bold",
-                  color: "#FFFFFF",
+                  color: "#1eb3a4",
                 }} // ACTIONS
               >
                 Actions
@@ -184,12 +184,16 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
               .map((facility) => (
                 <TableRow
                   key={facility.id}
-                  style={{ backgroundColor: "#6C5B7B" }} // Body of table data.
+                  style={{
+                    backgroundColor: "#ced5d6",
+                  }} // Body of table data.
                 >
                   {headerCells.map((headCell) => (
                     <TableCell
                       key={headCell.id}
-                      style={{ fontWeight: "bold", color: "#FFFFFF" }}
+                      style={{
+                        color: "",
+                      }} // Table text
                     >
                       {headCell.id === "address" ? (
                         `${facility.address.street}, ${facility.address.city}, ${facility.address.state} ${facility.address.zipcode}`
@@ -211,42 +215,40 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                       )}
                     </TableCell>
                   ))}
+                  <div style={{ marginTop: "10px" }}>
+                    <Button
+                      size="small"
+                      style={{
+                        minWidth: "15px",
+                        height: "15px",
+                      }}
+                      onClick={() => addSelectedFacility(facility.id)}
+                    >
+                      <AddIcon />
+                    </Button>
 
-                  <Button
-                    variant="contained"
-                    size="small"
-                    style={{
-                      minWidth: "25px",
-                      height: "25px",
-                    }}
-                    onClick={() => addSelectedFacility(facility.id)}
-                  >
-                    <AddIcon />
-                  </Button>
+                    <Button
+                      size="small"
+                      style={{
+                        minWidth: "15px",
+                        height: "15px",
+                      }}
+                      onClick={() => editFacility(facility.id)}
+                    >
+                      <EditIcon fontSize="small" />
+                    </Button>
 
-                  <Button
-                    variant="contained"
-                    size="small"
-                    style={{
-                      minWidth: "25px",
-                      height: "25px",
-                    }}
-                    onClick={() => editFacility(facility.id)}
-                  >
-                    <EditIcon fontSize="small" />
-                  </Button>
-
-                  <Button
-                    variant="contained"
-                    size="small"
-                    style={{
-                      minWidth: "25px",
-                      height: "25px",
-                    }}
-                    onClick={() => deleteFacility(facility.id)}
-                  >
-                    <DeleteIcon />
-                  </Button>
+                    <Button
+                      size="small"
+                      style={{
+                        minWidth: "15px",
+                        height: "15px",
+                      }}
+                      onClick={() => deleteFacility(facility.id)}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </div>
                 </TableRow>
               ))}
           </TableBody>

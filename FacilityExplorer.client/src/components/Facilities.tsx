@@ -29,8 +29,8 @@ function Facilities() {
   const [editingFacilityId, setEditingFacilityId] = useState<number>(-1);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const muiBlueColor = "#1976d2";
-  const [borderColor, setBorderColor] = useState<string>(muiBlueColor); // Blue MUI color
+  const redAllButtonColor = "#9c222e";
+  const [borderColor, setBorderColor] = useState<string>(redAllButtonColor);
   const [filterButtonClicked, setFilterButtonClicked] =
     useState<boolean>(false);
   const [page, setPage] = React.useState(0);
@@ -144,17 +144,17 @@ function Facilities() {
   };
 
   const renderFilterButtons = () => {
-    const buttonColors = ["#9DA9A0", "#654C4F", "#CEC075"];
+    const buttonColors = ["#1eb3a4", "#1eb3a4", "#1eb3a4"];
 
     return (
       <>
         <div style={{ marginBottom: "10px" }}>
           <Button
             variant="contained"
-            style={{ backgroundColor: muiBlueColor, marginRight: "10px" }}
+            style={{ backgroundColor: redAllButtonColor, marginRight: "10px" }}
             onClick={() => {
               filterSubTableByType("All");
-              setBorderColor(muiBlueColor);
+              setBorderColor(redAllButtonColor);
             }}
           >
             All
@@ -166,12 +166,16 @@ function Facilities() {
               style={{
                 marginRight: "10px",
                 backgroundColor:
-                  facilityType === "All" ? muiBlueColor : buttonColors[index],
+                  facilityType === "All"
+                    ? redAllButtonColor
+                    : buttonColors[index],
               }}
               onClick={() => {
                 filterSubTableByType(facilityType);
                 setBorderColor(
-                  facilityType === "All" ? muiBlueColor : buttonColors[index]
+                  facilityType === "All"
+                    ? redAllButtonColor
+                    : buttonColors[index]
                 );
               }}
             >

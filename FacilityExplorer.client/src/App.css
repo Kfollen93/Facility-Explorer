@@ -22,10 +22,16 @@ td {
 }
 
 body {
-  background-color: #f8f8f8;
+  background-color: rgb(111, 158, 153);
+  background-color: linear-gradient(
+    90deg,
+    rgba(36, 204, 189, 1) 0%,
+    rgba(62, 166, 184, 1) 73%,
+    rgba(42, 181, 209, 1) 100%
+  );
   background-image: url("/images/subtlebg.png");
   background-size: cover;
-  /* background-blend-mode: overlay; */
+  background-blend-mode: overlay;
 }
 
 /* Media query for smaller screens */
