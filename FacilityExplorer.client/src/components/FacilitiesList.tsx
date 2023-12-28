@@ -112,20 +112,21 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
       <div
         style={{
           display: "flex",
-          alignItems: "center",
+          justifyContent: "flex-end",
+          padding: "8px",
         }}
       >
         <Button
           variant="contained"
           size="small"
           style={{
-            marginLeft: "945px",
-            minWidth: "25px",
-            height: "25px",
+            backgroundColor: "#FFFFFF",
+            color: "#1eb3a4",
+            fontWeight: "bold",
           }}
           onClick={createFacility}
         >
-          <AddBusinessIcon />
+          Add <AddBusinessIcon style={{ paddingLeft: "5px" }} />
         </Button>
       </div>
       <TableContainer
