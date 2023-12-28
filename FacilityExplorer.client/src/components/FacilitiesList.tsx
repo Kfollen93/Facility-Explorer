@@ -103,10 +103,10 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   return (
     <div
       style={{
-        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0px 8px 8px rgba(0, 0, 0, 0.2)",
         borderRadius: "8px",
         padding: "8px",
-        backgroundColor: "#71A2E7", // Space between border and table.
+        backgroundColor: "#556D85", // Space between border and table.
       }}
     >
       <div
@@ -181,15 +181,13 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                 <TableRow
                   key={facility.id}
                   style={{
-                    backgroundColor: "#ced5d6",
+                    backgroundColor: "#f9f9f9",
                   }} // Body of table data.
                 >
                   {headerCells.map((headCell) => (
                     <TableCell
                       key={headCell.id}
-                      style={{
-                        color: "",
-                      }} // Table text
+                      style={{}} // Table text
                     >
                       {headCell.id === "address" ? (
                         `${facility.address.street}, ${facility.address.city}, ${facility.address.state} ${facility.address.zipcode}`
@@ -211,40 +209,51 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                       )}
                     </TableCell>
                   ))}
-                  <div style={{ marginTop: "10px" }}>
-                    <Button
-                      size="small"
+                  <TableCell>
+                    <div
                       style={{
-                        minWidth: "15px",
-                        height: "15px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                       }}
-                      onClick={() => addSelectedFacility(facility.id)}
                     >
-                      <AddIcon />
-                    </Button>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <Button
+                          size="small"
+                          style={{
+                            minWidth: "15px",
+                            height: "15px",
+                          }}
+                          onClick={() => addSelectedFacility(facility.id)}
+                        >
+                          <AddIcon />
+                        </Button>
 
-                    <Button
-                      size="small"
-                      style={{
-                        minWidth: "15px",
-                        height: "15px",
-                      }}
-                      onClick={() => editFacility(facility.id)}
-                    >
-                      <EditIcon fontSize="small" />
-                    </Button>
+                        <Button
+                          size="small"
+                          style={{
+                            minWidth: "15px",
+                            height: "15px",
+                          }}
+                          onClick={() => editFacility(facility.id)}
+                        >
+                          <EditIcon fontSize="small" />
+                        </Button>
+                      </div>
 
-                    <Button
-                      size="small"
-                      style={{
-                        minWidth: "15px",
-                        height: "15px",
-                      }}
-                      onClick={() => deleteFacility(facility.id)}
-                    >
-                      <DeleteIcon />
-                    </Button>
-                  </div>
+                      <Button
+                        size="small"
+                        style={{
+                          minWidth: "15px",
+                          height: "15px",
+                          marginTop: "5px",
+                        }}
+                        onClick={() => deleteFacility(facility.id)}
+                      >
+                        <DeleteIcon />
+                      </Button>
+                    </div>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
