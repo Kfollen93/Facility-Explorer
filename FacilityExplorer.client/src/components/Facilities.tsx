@@ -30,7 +30,6 @@ function Facilities() {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const redAllButtonColor = "#9c222e";
-  const [borderColor, setBorderColor] = useState<string>(redAllButtonColor);
   const [filterButtonClicked, setFilterButtonClicked] =
     useState<boolean>(false);
   const [page, setPage] = React.useState(0);
@@ -144,8 +143,8 @@ function Facilities() {
   };
 
   const renderFilterButtons = () => {
+    // Array of facility type button colors, may remove. Right now same color.
     const buttonColors = ["#1eb3a4", "#1eb3a4", "#1eb3a4"];
-
     return (
       <>
         <div style={{ marginBottom: "10px" }}>
@@ -154,7 +153,6 @@ function Facilities() {
             style={{ backgroundColor: redAllButtonColor, marginRight: "10px" }}
             onClick={() => {
               filterSubTableByType("All");
-              setBorderColor(redAllButtonColor);
             }}
           >
             All
@@ -172,11 +170,6 @@ function Facilities() {
               }}
               onClick={() => {
                 filterSubTableByType(facilityType);
-                setBorderColor(
-                  facilityType === "All"
-                    ? redAllButtonColor
-                    : buttonColors[index]
-                );
               }}
             >
               {facilityType}
@@ -227,7 +220,6 @@ function Facilities() {
           createFacility={openGenericModal}
           searchTerm={searchTerm}
           handleSearchChange={(event) => setSearchTerm(event.target.value)}
-          borderColor={borderColor}
           setPage={setPage}
           page={page}
         />

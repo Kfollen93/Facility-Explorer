@@ -26,7 +26,6 @@ interface FacilitiesListProps {
   createFacility: () => void;
   searchTerm: string;
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  borderColor: string;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   page: number;
 }
@@ -55,7 +54,6 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   editFacility,
   createFacility,
   searchTerm,
-  // borderColor,
   setPage,
   page,
 }) => {
@@ -105,11 +103,10 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   return (
     <div
       style={{
-        // boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
-        // border: `8px solid ${borderColor}`,
         padding: "8px",
-        backgroundColor: "#FFFFFF", // Space between border and table.
+        backgroundColor: "#71A2E7", // Space between border and table.
       }}
     >
       <div
@@ -136,8 +133,6 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           maxHeight: "500px",
           overflowY: "auto",
           borderRadius: "8px",
-          // boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Remove box shadow to make it look like one table.
-          //border: `4px solid ${borderColor}`,
         }}
       >
         <Table stickyHeader={true}>
