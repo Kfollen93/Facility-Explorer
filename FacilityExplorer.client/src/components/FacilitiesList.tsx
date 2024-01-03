@@ -107,7 +107,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           "0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 4px rgba(0, 0, 0, 0.2) inset",
         borderRadius: "8px",
         padding: "8px",
-        // backgroundColor: "", // Space between border and table.
+        backgroundColor: "#ccac8c", // Space between border and table.
       }}
     >
       <div
@@ -122,7 +122,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           size="small"
           style={{
             backgroundColor: "#FFFFFF",
-            color: "#1eb3a4",
+            color: "black",
             fontWeight: "bold",
           }}
           onClick={createFacility}
@@ -146,7 +146,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                   style={{
                     backgroundColor: "#FFFFFF",
                     fontWeight: "bold",
-                    color: "#1eb3a4",
+                    color: "black",
                   }} // Header row.
                 >
                   {["name", "typeOfFacility", "insurance"].includes(
@@ -168,7 +168,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                 style={{
                   backgroundColor: "#FFFFFF",
                   fontWeight: "bold",
-                  color: "#1eb3a4",
+                  color: "black",
                 }} // ACTIONS
               >
                 Actions

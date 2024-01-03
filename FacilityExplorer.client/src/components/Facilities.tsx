@@ -29,7 +29,7 @@ function Facilities() {
   const [editingFacilityId, setEditingFacilityId] = useState<number>(-1);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const redAllButtonColor = "#9c222e";
+  const allButtonColor = "#ec8c1b";
   const [filterButtonClicked, setFilterButtonClicked] =
     useState<boolean>(false);
   const [page, setPage] = React.useState(0);
@@ -144,13 +144,13 @@ function Facilities() {
 
   const renderFilterButtons = () => {
     // Array of facility type button colors, may remove. Right now same color.
-    const buttonColors = ["#1eb3a4", "#1eb3a4", "#1eb3a4"];
+    const buttonColors = ["#248cdc", "#eccc3c", "#2cb464"];
     return (
       <>
         <div style={{ marginBottom: "10px" }}>
           <Button
             variant="contained"
-            style={{ backgroundColor: redAllButtonColor, marginRight: "10px" }}
+            style={{ backgroundColor: allButtonColor, marginRight: "10px" }}
             onClick={() => {
               filterSubTableByType("All");
             }}
@@ -164,9 +164,7 @@ function Facilities() {
               style={{
                 marginRight: "10px",
                 backgroundColor:
-                  facilityType === "All"
-                    ? redAllButtonColor
-                    : buttonColors[index],
+                  facilityType === "All" ? allButtonColor : buttonColors[index],
               }}
               onClick={() => {
                 filterSubTableByType(facilityType);
