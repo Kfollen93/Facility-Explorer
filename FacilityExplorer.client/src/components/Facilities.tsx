@@ -9,12 +9,17 @@ import FacilityForm from "./FacilityForm";
 import SelectedFacilitiesList from "./SelectedFacilities";
 import generatePDF from "../utils/pdfUtils";
 import GenericModal from "./GenericModal";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
+import { facilityTypes } from "../utils/facilityTypes";
 
 function Facilities() {
   const [facilities, setFacilities] = useState<Facility[] | undefined>(
     undefined
   );
+  const [copyOfFacilities, setCopyOfFacilities] = useState<
+    Facility[] | undefined
+  >(undefined);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [newFacility, setNewFacility] = useState<FacilityRequest>(
     defaultFacilityRequest
@@ -23,6 +28,11 @@ function Facilities() {
   const [isGenericModalOpen, setIsGenericModalOpen] = useState<boolean>(false);
   const [editingFacilityId, setEditingFacilityId] = useState<number>(-1);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const allButtonColor = "#ec8c1b";
+  const [filterButtonClicked, setFilterButtonClicked] =
+    useState<boolean>(false);
+  const [page, setPage] = React.useState(0);
 
   useEffect(() => {
     getFacilities();
@@ -34,6 +44,7 @@ function Facilities() {
       const data = await facilityService.getFacilities();
       if (data !== undefined) {
         setFacilities(data);
+        setCopyOfFacilities(data);
       }
     } finally {
       setLoading(false);
@@ -41,7 +52,6 @@ function Facilities() {
   };
 
   const handleInputChange = (field: string, value: string) => {
-    console.log("handleinputchange");
     setNewFacility((prevFacility) => ({
       ...prevFacility,
       [field]: value,
@@ -50,8 +60,6 @@ function Facilities() {
 
   const handleCreateFacility = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Creating facility with data:", newFacility);
-
     await facilityService.createFacility(newFacility);
     setNewFacility(defaultFacilityRequest);
     await getFacilities();
@@ -109,7 +117,6 @@ function Facilities() {
   };
 
   const openGenericModal = () => {
-    console.log("modal opened");
     setIsGenericModalOpen(true);
   };
 
@@ -122,14 +129,70 @@ function Facilities() {
     generatePDF(selectedFacilities);
   };
 
+  const filterSubTableByType = (facilityType: string) => {
+    if (facilityType === "All") {
+      setFacilities(copyOfFacilities);
+    } else {
+      const filteredFacilities = copyOfFacilities?.filter(
+        (facility) => facility.typeOfFacility === facilityType
+      );
+      setFacilities(filteredFacilities);
+    }
+    setPage(0); // Reset table page when clicking new tab.
+    setFilterButtonClicked(true);
+  };
+
+  const renderFilterButtons = () => {
+    // Array of facility type button colors, may remove. Right now same color.
+    const buttonColors = ["#248cdc", "#eccc3c", "#2cb464"];
+    return (
+      <>
+        <div style={{ marginBottom: "10px" }}>
+          <Button
+            variant="contained"
+            style={{ backgroundColor: allButtonColor, marginRight: "10px" }}
+            onClick={() => {
+              filterSubTableByType("All");
+            }}
+          >
+            All
+          </Button>
+          {Object.entries(facilityTypes).map(([facilityType], index) => (
+            <Button
+              key={facilityType}
+              variant="contained"
+              style={{
+                marginRight: "10px",
+                backgroundColor:
+                  facilityType === "All" ? allButtonColor : buttonColors[index],
+              }}
+              onClick={() => {
+                filterSubTableByType(facilityType);
+              }}
+            >
+              {facilityType}
+            </Button>
+          ))}
+        </div>
+      </>
+    );
+  };
+
   const contents = loading ? (
-    <p>Loading facilities...</p>
-  ) : facilities === undefined ? (
     <p>
-      <Button variant="contained" onClick={getFacilities}>
-        Refresh Facilities
-      </Button>
+      <i>Loading facilities...</i>
     </p>
+  ) : facilities === undefined ? (
+    <div>
+      <i>
+        Try to refresh, but please note the server may be down for development.
+      </i>
+      <p>
+        <Button variant="contained" onClick={getFacilities}>
+          Refresh Facilities
+        </Button>
+      </p>
+    </div>
   ) : (
     <div>
       <GenericModal
@@ -145,13 +208,23 @@ function Facilities() {
           />
         }
       />
-      <FacilitiesList
-        facilities={facilities}
-        addSelectedFacility={addSelectedFacility}
-        deleteFacility={deleteFacility}
-        editFacility={editFacility}
-        createFacility={openGenericModal}
-      />
+      <>{renderFilterButtons()}</>
+      {searchTerm !== "" || filterButtonClicked ? (
+        <FacilitiesList
+          facilities={facilities}
+          addSelectedFacility={addSelectedFacility}
+          deleteFacility={deleteFacility}
+          editFacility={editFacility}
+          createFacility={openGenericModal}
+          searchTerm={searchTerm}
+          handleSearchChange={(event) => setSearchTerm(event.target.value)}
+          setPage={setPage}
+          page={page}
+        />
+      ) : (
+        ""
+      )}
+
       <SelectedFacilitiesList
         selectedFacilities={selectedFacilities}
         removeSelectedFacility={removeSelectedFacility}
@@ -163,6 +236,21 @@ function Facilities() {
   return (
     <div>
       <h2 id="tabelLabel">Facilities</h2>
+
+      <div style={{ marginBottom: "16px" }}>
+        <TextField
+          label="Search..."
+          size="small"
+          variant="outlined"
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+        />
+        {/* <Button variant="contained" onClick={getFacilities}>
+          Refresh Facilities
+        </Button> */}
+      </div>
       {contents}
     </div>
   );

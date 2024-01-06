@@ -10,7 +10,6 @@ import {
   TableRow,
   TableSortLabel,
   TablePagination,
-  TextField,
   Link,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
@@ -25,6 +24,10 @@ interface FacilitiesListProps {
   deleteFacility: (id: number) => void;
   editFacility: (id: number) => void;
   createFacility: () => void;
+  searchTerm: string;
+  handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
 }
 
 interface HeadCell {
@@ -50,12 +53,13 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   deleteFacility,
   editFacility,
   createFacility,
+  searchTerm,
+  setPage,
+  page,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
-  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [searchTerm, setSearchTerm] = React.useState("");
 
   const handleRequestSort = (property: keyof Facility) => {
     const isAsc = orderBy === property && order === "asc";
@@ -72,10 +76,6 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  };
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
   };
 
   const filteredFacilities = React.useMemo(() => {
@@ -103,45 +103,52 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   return (
     <div
       style={{
-        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+        boxShadow:
+          "0px 4px 4px rgba(0, 0, 0, 0.2), 0px 0px 4px rgba(0, 0, 0, 0.2) inset",
         borderRadius: "8px",
-        border: "1px solid #e0e0e0",
-        padding: "16px",
+        padding: "8px",
+        backgroundColor: "#ccac8c", // Space between border and table.
       }}
     >
       <div
         style={{
           display: "flex",
-          alignItems: "center",
+          justifyContent: "flex-end",
+          padding: "8px",
         }}
       >
-        <TextField
-          style={{ marginRight: "8px", paddingLeft: "8px" }}
-          label="Search..."
-          size="small"
-          variant="outlined"
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
         <Button
           variant="contained"
           size="small"
           style={{
-            marginLeft: "945px",
-            minWidth: "25px",
-            height: "25px",
+            backgroundColor: "#FFFFFF",
+            color: "black",
+            fontWeight: "bold",
           }}
           onClick={createFacility}
         >
-          <AddBusinessIcon />
+          Add <AddBusinessIcon style={{ paddingLeft: "5px" }} />
         </Button>
       </div>
-      <TableContainer style={{ maxHeight: "600px", overflowY: "auto" }}>
+      <TableContainer
+        style={{
+          maxHeight: "500px",
+          overflowY: "auto",
+          borderRadius: "8px",
+        }}
+      >
         <Table stickyHeader={true}>
           <TableHead>
             <TableRow>
               {headerCells.map((headCell) => (
-                <TableCell key={headCell.id}>
+                <TableCell
+                  key={headCell.id}
+                  style={{
+                    backgroundColor: "#FFFFFF",
+                    fontWeight: "bold",
+                    color: "black",
+                  }} // Header row.
+                >
                   {["name", "typeOfFacility", "insurance"].includes(
                     headCell.id
                   ) ? (
@@ -157,18 +164,32 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                   )}
                 </TableCell>
               ))}
-              <TableCell>Select</TableCell>
-              <TableCell>Edit</TableCell>
-              <TableCell>Delete</TableCell>
+              <TableCell
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  fontWeight: "bold",
+                  color: "black",
+                }} // ACTIONS
+              >
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {sortedFacilities
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((facility) => (
-                <TableRow key={facility.id}>
+                <TableRow
+                  key={facility.id}
+                  style={{
+                    backgroundColor: "#f9f9f9",
+                  }} // Body of table data.
+                >
                   {headerCells.map((headCell) => (
-                    <TableCell key={headCell.id}>
+                    <TableCell
+                      key={headCell.id}
+                      style={{}} // Table text
+                    >
                       {headCell.id === "address" ? (
                         `${facility.address.street}, ${facility.address.city}, ${facility.address.state} ${facility.address.zipcode}`
                       ) : headCell.id === "websiteUrl" ? (
@@ -190,43 +211,52 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                     </TableCell>
                   ))}
                   <TableCell>
-                    <Button
-                      variant="contained"
-                      size="small"
+                    <div
                       style={{
-                        minWidth: "25px",
-                        height: "25px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                       }}
-                      onClick={() => addSelectedFacility(facility.id)}
                     >
-                      <AddIcon />
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      style={{
-                        minWidth: "25px",
-                        height: "25px",
-                      }}
-                      onClick={() => editFacility(facility.id)}
-                    >
-                      <EditIcon fontSize="small" />
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      size="small"
-                      style={{
-                        minWidth: "25px",
-                        height: "25px",
-                      }}
-                      onClick={() => deleteFacility(facility.id)}
-                    >
-                      <DeleteIcon />
-                    </Button>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <Button
+                          size="small"
+                          style={{
+                            minWidth: "15px",
+                            height: "15px",
+                            color: "#1eb3a4",
+                          }}
+                          onClick={() => addSelectedFacility(facility.id)}
+                        >
+                          <AddIcon />
+                        </Button>
+
+                        <Button
+                          size="small"
+                          style={{
+                            minWidth: "15px",
+                            height: "15px",
+                            color: "#1eb3a4",
+                          }}
+                          onClick={() => editFacility(facility.id)}
+                        >
+                          <EditIcon fontSize="small" />
+                        </Button>
+                      </div>
+
+                      <Button
+                        size="small"
+                        style={{
+                          minWidth: "15px",
+                          height: "15px",
+                          marginTop: "5px",
+                          color: "#1eb3a4",
+                        }}
+                        onClick={() => deleteFacility(facility.id)}
+                      >
+                        <DeleteIcon />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
