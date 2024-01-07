@@ -127,7 +127,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           }}
           onClick={createFacility}
         >
-          Add <AddBusinessIcon style={{ paddingLeft: "5px" }} />
+          Create <AddBusinessIcon style={{ paddingLeft: "5px" }} />
         </Button>
       </div>
       <TableContainer
