@@ -11,6 +11,7 @@ import generatePDF from "../utils/pdfUtils";
 import GenericModal from "./GenericModal";
 import { Button, TextField } from "@mui/material";
 import { facilityTypes } from "../utils/facilityTypes";
+import Login from "./Login";
 
 function Facilities() {
   const [facilities, setFacilities] = useState<Facility[] | undefined>(
@@ -142,6 +143,8 @@ function Facilities() {
     setFilterButtonClicked(true);
   };
 
+  const onLogin = () => {};
+
   const renderFilterButtons = () => {
     // Array of facility type button colors, may remove. Right now same color.
     const buttonColors = ["#248cdc", "#eccc3c", "#2cb464"];
@@ -195,6 +198,7 @@ function Facilities() {
     </div>
   ) : (
     <div>
+      <Login onLogin={onLogin} />
       <GenericModal
         open={isGenericModalOpen}
         onClose={closeGenericModal}
@@ -236,7 +240,6 @@ function Facilities() {
   return (
     <div>
       <h2 id="tabelLabel">Facilities</h2>
-
       <div style={{ marginBottom: "16px" }}>
         <TextField
           label="Search..."
@@ -247,9 +250,6 @@ function Facilities() {
             setSearchTerm(event.target.value);
           }}
         />
-        {/* <Button variant="contained" onClick={getFacilities}>
-          Refresh Facilities
-        </Button> */}
       </div>
       {contents}
     </div>
