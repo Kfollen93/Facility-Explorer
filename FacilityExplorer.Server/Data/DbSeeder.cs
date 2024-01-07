@@ -4,7 +4,7 @@ namespace FacilityExplorer.Server.Data
 {
     public static class DbSeeder
     {
-        public static void SeedData(DataContext context)
+        public static async Task SeedData(DataContext context)
         {
             if (!context.Facilities.Any())
             {
@@ -491,14 +491,14 @@ namespace FacilityExplorer.Server.Data
                 }
                 );
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        public static void ClearData(DataContext context)
+        public static async Task ClearData(DataContext context)
         {
             context.Facilities.RemoveRange(context.Facilities);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }
