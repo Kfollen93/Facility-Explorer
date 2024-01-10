@@ -1,3 +1,5 @@
+import authenticationService from "./authenticationService";
+
 export interface FacilityRequest {
   name: string;
   typeOfFacility: string;
@@ -113,8 +115,12 @@ const facilityService = {
 
   deleteFacility: async (id: number): Promise<void> => {
     try {
+      const headers = authenticationService.addAuthorizationHeader({});
+      console.log("Request Headers:", headers);
+
       const response = await fetch(`${BASE_URL}facility/${id}`, {
         method: DELETE,
+        headers,
       });
 
       if (!response.ok) {
