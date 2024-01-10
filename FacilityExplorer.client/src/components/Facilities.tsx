@@ -12,6 +12,7 @@ import GenericModal from "./GenericModal";
 import { Button, TextField } from "@mui/material";
 import { facilityTypes } from "../utils/facilityTypes";
 import Login from "./Login";
+import authenticationService from "../services/authenticationService";
 
 function Facilities() {
   const [facilities, setFacilities] = useState<Facility[] | undefined>(
@@ -143,7 +144,9 @@ function Facilities() {
     setFilterButtonClicked(true);
   };
 
-  const onLogin = () => {};
+  const handleLogin = async (username: string, password: string) => {
+    await authenticationService.login(username, password);
+  };
 
   const renderFilterButtons = () => {
     // Array of facility type button colors, may remove. Right now same color.
@@ -198,7 +201,7 @@ function Facilities() {
     </div>
   ) : (
     <div>
-      <Login onLogin={onLogin} />
+      <Login onLogin={handleLogin} />
       <GenericModal
         open={isGenericModalOpen}
         onClose={closeGenericModal}
