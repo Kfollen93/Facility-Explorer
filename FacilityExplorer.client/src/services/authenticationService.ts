@@ -1,6 +1,7 @@
 const BASE_URL = "https://localhost:5001/";
 
 const authenticationService = {
+  accessToken: "",
   login: async (email: string, password: string): Promise<void> => {
     const loginObj = {
       email,
@@ -20,20 +21,21 @@ const authenticationService = {
       console.log("Full Response:", response);
 
       if (response.ok) {
-        const contentType = response.headers.get("content-type");
-
-        if (contentType && contentType.includes("application/json")) {
-          const loggedIn = await response.json();
-          console.log("Successfully Logged In:", loggedIn);
-        } else {
-          console.error("Failed to login: Response does not contain JSON data");
-        }
+        const loggedIn = await response.json();
+        authenticationService.accessToken = loggedIn.accessToken;
       } else {
         console.error("Failed to login:", response.statusText);
       }
     } catch (error) {
       console.error("Error trying to login:", error);
     }
+  },
+
+  addAuthorizationHeader: (options: RequestInit): HeadersInit => {
+    return {
+      ...(options.headers as Record<string, string>),
+      Authorization: `Bearer ${authenticationService.accessToken}`,
+    };
   },
 };
 
