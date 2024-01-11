@@ -9,7 +9,6 @@ const authenticationService = {
     };
 
     try {
-      // Using bearer token, but can change to cookies with query `login?useCookies=true`
       const response = await fetch(`${BASE_URL}login`, {
         method: "POST",
         headers: {
@@ -18,22 +17,21 @@ const authenticationService = {
         body: JSON.stringify(loginObj),
       });
 
-      console.log("Full Response:", response);
-
       if (response.ok) {
         const loggedIn = await response.json();
         authenticationService.accessToken = loggedIn.accessToken;
       } else {
-        console.error("Failed to login:", response.statusText);
+        console.error("Failed to login");
       }
     } catch (error) {
-      console.error("Error trying to login:", error);
+      console.error("Error trying to login");
     }
   },
 
   addAuthorizationHeader: (options: RequestInit): HeadersInit => {
     return {
       ...(options.headers as Record<string, string>),
+      "Content-Type": "application/json",
       Authorization: `Bearer ${authenticationService.accessToken}`,
     };
   },
