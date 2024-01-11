@@ -40,8 +40,8 @@ builder.Services.AddCors(options =>
     {
         builder
         .WithOrigins("https://localhost:5173")
-        .AllowAnyHeader()
-        .AllowAnyMethod();
+        .WithHeaders("Content-Type", "Authorization")
+        .WithMethods("GET", "POST", "PUT", "DELETE", "PATCH");
     });
 });
 
@@ -83,7 +83,7 @@ static async Task CreateAdminAccount(IServiceScope serviceScope)
     var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
     var adminCredentials = configuration.GetSection("AdminCredentials");
-    string? email = adminCredentials["Email"];
+    string email = adminCredentials["Email"]!;
     string password = adminCredentials["Password"]!;
 
     if (await userManager.FindByEmailAsync(email) == null)
