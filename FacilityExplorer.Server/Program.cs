@@ -5,11 +5,14 @@ using FacilityExplorer.Server.Middlewares;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using FacilityExplorer.Server.Repositories.UserManagementRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<IFacilityRepository, FacilityRepository>();
+builder.Services.AddScoped<IUserManagementRepository, UserManagementRepository>();
+
 builder.Services.AddTransient<GlobalExceptionHandling>();
 builder.Services.AddLogging();
 
@@ -85,6 +88,7 @@ static async Task CreateAdminAccount(IServiceScope serviceScope)
     var adminCredentials = configuration.GetSection("AdminCredentials");
     string email = adminCredentials["Email"]!;
     string password = adminCredentials["Password"]!;
+
 
     if (await userManager.FindByEmailAsync(email) == null)
     {
