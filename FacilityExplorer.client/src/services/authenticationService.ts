@@ -28,6 +28,20 @@ const authenticationService = {
     }
   },
 
+  getRoles: async (email: string): Promise<string[]> => {
+    try {
+      const response = await fetch(`${BASE_URL}api/roles/${email}`, {
+        method: "GET",
+      });
+      const data = await response.json();
+      console.log("Roles data: ", data);
+      return data;
+    } catch (error) {
+      console.error("Error fetching roles");
+      return [];
+    }
+  },
+
   addAuthorizationHeader: (options: RequestInit): HeadersInit => {
     return {
       ...(options.headers as Record<string, string>),
