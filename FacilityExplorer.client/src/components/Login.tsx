@@ -7,12 +7,12 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
-  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleLogin = () => {
-    onLogin(username, password);
+    onLogin(email, password);
     setIsModalOpen(false);
   };
 
@@ -24,10 +24,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           variant="outlined"
           margin="normal"
           fullWidth
-          id="username"
-          label="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          id="email"
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <TextField
           variant="outlined"
