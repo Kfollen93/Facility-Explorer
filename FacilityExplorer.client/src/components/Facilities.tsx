@@ -144,8 +144,9 @@ function Facilities() {
     setFilterButtonClicked(true);
   };
 
-  const handleLogin = async (username: string, password: string) => {
-    await authenticationService.login(username, password);
+  const handleLogin = async (email: string, password: string) => {
+    await authenticationService.login(email, password);
+    await authenticationService.getRoles(email); // TODO: Set this up in state for UI render checks.
   };
 
   const renderFilterButtons = () => {
