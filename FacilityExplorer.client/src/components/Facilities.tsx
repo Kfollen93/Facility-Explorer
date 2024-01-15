@@ -35,6 +35,7 @@ function Facilities() {
   const [filterButtonClicked, setFilterButtonClicked] =
     useState<boolean>(false);
   const [page, setPage] = React.useState(0);
+  const [roles, setRoles] = useState<string[]>();
 
   useEffect(() => {
     getFacilities();
@@ -146,7 +147,7 @@ function Facilities() {
 
   const handleLogin = async (email: string, password: string) => {
     await authenticationService.login(email, password);
-    await authenticationService.getRoles(email); // TODO: Set this up in state for UI render checks.
+    setRoles(await authenticationService.getRoles(email));
   };
 
   const renderFilterButtons = () => {
@@ -225,6 +226,7 @@ function Facilities() {
           editFacility={editFacility}
           createFacility={openGenericModal}
           searchTerm={searchTerm}
+          roles={roles}
           handleSearchChange={(event) => setSearchTerm(event.target.value)}
           setPage={setPage}
           page={page}

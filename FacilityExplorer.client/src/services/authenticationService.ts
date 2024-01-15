@@ -34,7 +34,6 @@ const authenticationService = {
         method: "GET",
       });
       const data = await response.json();
-      console.log("Roles data: ", data);
       return data;
     } catch (error) {
       console.error("Error fetching roles");

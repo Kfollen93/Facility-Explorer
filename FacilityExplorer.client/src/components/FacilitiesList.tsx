@@ -25,6 +25,7 @@ interface FacilitiesListProps {
   editFacility: (id: number) => void;
   createFacility: () => void;
   searchTerm: string;
+  roles: string[] | undefined;
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   page: number;
@@ -56,6 +57,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   searchTerm,
   setPage,
   page,
+  roles,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
@@ -117,18 +119,20 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           padding: "8px",
         }}
       >
-        <Button
-          variant="contained"
-          size="small"
-          style={{
-            backgroundColor: "#FFFFFF",
-            color: "black",
-            fontWeight: "bold",
-          }}
-          onClick={createFacility}
-        >
-          Create <AddBusinessIcon style={{ paddingLeft: "5px" }} />
-        </Button>
+        {roles && roles.includes("Admin") && (
+          <Button
+            variant="contained"
+            size="small"
+            style={{
+              backgroundColor: "#FFFFFF",
+              color: "black",
+              fontWeight: "bold",
+            }}
+            onClick={createFacility}
+          >
+            Create <AddBusinessIcon style={{ paddingLeft: "5px" }} />
+          </Button>
+        )}
       </div>
       <TableContainer
         style={{
@@ -230,32 +234,34 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                         >
                           <AddIcon />
                         </Button>
-
+                        {roles && roles.includes("Admin") && (
+                          <Button
+                            size="small"
+                            style={{
+                              minWidth: "15px",
+                              height: "15px",
+                              color: "#1eb3a4",
+                            }}
+                            onClick={() => editFacility(facility.id)}
+                          >
+                            <EditIcon fontSize="small" />
+                          </Button>
+                        )}
+                      </div>
+                      {roles && roles.includes("Admin") && (
                         <Button
                           size="small"
                           style={{
                             minWidth: "15px",
                             height: "15px",
+                            marginTop: "5px",
                             color: "#1eb3a4",
                           }}
-                          onClick={() => editFacility(facility.id)}
+                          onClick={() => deleteFacility(facility.id)}
                         >
-                          <EditIcon fontSize="small" />
+                          <DeleteIcon />
                         </Button>
-                      </div>
-
-                      <Button
-                        size="small"
-                        style={{
-                          minWidth: "15px",
-                          height: "15px",
-                          marginTop: "5px",
-                          color: "#1eb3a4",
-                        }}
-                        onClick={() => deleteFacility(facility.id)}
-                      >
-                        <DeleteIcon />
-                      </Button>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>
