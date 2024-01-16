@@ -1,3 +1,5 @@
+import authenticationService from "./authenticationService";
+
 export interface FacilityRequest {
   name: string;
   typeOfFacility: string;
@@ -52,11 +54,10 @@ const facilityService = {
     updatedFacility: FacilityRequest
   ): Promise<FacilityRequest> => {
     try {
+      const headers = authenticationService.addAuthorizationHeader({});
       const response = await fetch(`${BASE_URL}facility/${id}`, {
         method: PUT,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify(updatedFacility),
       });
 
@@ -67,7 +68,7 @@ const facilityService = {
       const editedFacility = await response.json();
       return editedFacility;
     } catch (error) {
-      console.error("Error editing facility:", error);
+      console.error("Error editing facility:");
       throw error;
     }
   },
@@ -80,7 +81,7 @@ const facilityService = {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Error fetching facilities:", error);
+      console.error("Error fetching facilities");
       return undefined;
     }
   },
@@ -89,39 +90,40 @@ const facilityService = {
     facilityRequest: FacilityRequest
   ): Promise<Facility | undefined> => {
     try {
+      const headers = authenticationService.addAuthorizationHeader({});
       const response = await fetch(`${BASE_URL}facility`, {
         method: POST,
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify(facilityRequest),
       });
 
       if (response.ok) {
         const createdFacility = await response.json();
-        console.log("Created Facility:", createdFacility);
+        console.log("Created Facility");
         return createdFacility;
       } else {
-        console.error("Failed to create facility:", response.statusText);
+        console.error("Failed to create facility");
         return undefined;
       }
     } catch (error) {
-      console.error("Error creating facility:", error);
+      console.error("Error creating facility");
       return undefined;
     }
   },
 
   deleteFacility: async (id: number): Promise<void> => {
     try {
+      const headers = authenticationService.addAuthorizationHeader({});
       const response = await fetch(`${BASE_URL}facility/${id}`, {
         method: DELETE,
+        headers,
       });
 
       if (!response.ok) {
-        console.error("Failed to delete facility:", response.statusText);
+        console.error("Failed to delete facility");
       }
     } catch (error) {
-      console.error("Error deleting facility:", error);
+      console.error("Error deleting facility");
     }
   },
 };

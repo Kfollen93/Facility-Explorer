@@ -17,6 +17,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import { formatPhoneNumber } from "../utils/phoneNumberUtils";
+import Login from "./Login";
 
 interface FacilitiesListProps {
   facilities: Facility[] | undefined;
@@ -25,9 +26,11 @@ interface FacilitiesListProps {
   editFacility: (id: number) => void;
   createFacility: () => void;
   searchTerm: string;
+  roles: string[] | undefined;
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   page: number;
+  handleLogin: (email: string, password: string) => void;
 }
 
 interface HeadCell {
@@ -56,6 +59,8 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   searchTerm,
   setPage,
   page,
+  roles,
+  handleLogin,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
@@ -117,19 +122,27 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           padding: "8px",
         }}
       >
-        <Button
-          variant="contained"
-          size="small"
-          style={{
-            backgroundColor: "#FFFFFF",
-            color: "black",
-            fontWeight: "bold",
-          }}
-          onClick={createFacility}
-        >
-          Add <AddBusinessIcon style={{ paddingLeft: "5px" }} />
-        </Button>
+        <div style={{ marginBottom: "8px" }}>
+          <Login onLogin={handleLogin} />
+        </div>
+        <div>
+          {roles && roles.includes("Admin") && (
+            <Button
+              variant="contained"
+              size="small"
+              style={{
+                backgroundColor: "#FFFFFF",
+                color: "black",
+                fontWeight: "bold",
+              }}
+              onClick={createFacility}
+            >
+              Create <AddBusinessIcon style={{ paddingLeft: "5px" }} />
+            </Button>
+          )}
+        </div>
       </div>
+
       <TableContainer
         style={{
           maxHeight: "500px",
@@ -230,32 +243,34 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                         >
                           <AddIcon />
                         </Button>
-
+                        {roles && roles.includes("Admin") && (
+                          <Button
+                            size="small"
+                            style={{
+                              minWidth: "15px",
+                              height: "15px",
+                              color: "#1eb3a4",
+                            }}
+                            onClick={() => editFacility(facility.id)}
+                          >
+                            <EditIcon fontSize="small" />
+                          </Button>
+                        )}
+                      </div>
+                      {roles && roles.includes("Admin") && (
                         <Button
                           size="small"
                           style={{
                             minWidth: "15px",
                             height: "15px",
+                            marginTop: "5px",
                             color: "#1eb3a4",
                           }}
-                          onClick={() => editFacility(facility.id)}
+                          onClick={() => deleteFacility(facility.id)}
                         >
-                          <EditIcon fontSize="small" />
+                          <DeleteIcon />
                         </Button>
-                      </div>
-
-                      <Button
-                        size="small"
-                        style={{
-                          minWidth: "15px",
-                          height: "15px",
-                          marginTop: "5px",
-                          color: "#1eb3a4",
-                        }}
-                        onClick={() => deleteFacility(facility.id)}
-                      >
-                        <DeleteIcon />
-                      </Button>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>
