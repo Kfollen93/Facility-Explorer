@@ -52,13 +52,14 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   );
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container>
       <Button
         variant="contained"
         color="primary"
+        size="small"
         onClick={() => setIsModalOpen(true)}
       >
-        Login
+        Admin Login
       </Button>
 
       <GenericModal

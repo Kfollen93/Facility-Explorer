@@ -11,7 +11,6 @@ import generatePDF from "../utils/pdfUtils";
 import GenericModal from "./GenericModal";
 import { Button, TextField } from "@mui/material";
 import { facilityTypes } from "../utils/facilityTypes";
-import Login from "./Login";
 import authenticationService from "../services/authenticationService";
 
 function Facilities() {
@@ -203,7 +202,6 @@ function Facilities() {
     </div>
   ) : (
     <div>
-      <Login onLogin={handleLogin} />
       <GenericModal
         open={isGenericModalOpen}
         onClose={closeGenericModal}
@@ -230,6 +228,7 @@ function Facilities() {
           handleSearchChange={(event) => setSearchTerm(event.target.value)}
           setPage={setPage}
           page={page}
+          handleLogin={handleLogin}
         />
       ) : (
         ""

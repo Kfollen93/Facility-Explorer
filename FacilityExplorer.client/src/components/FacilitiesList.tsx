@@ -17,6 +17,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import { formatPhoneNumber } from "../utils/phoneNumberUtils";
+import Login from "./Login";
 
 interface FacilitiesListProps {
   facilities: Facility[] | undefined;
@@ -29,6 +30,7 @@ interface FacilitiesListProps {
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   page: number;
+  handleLogin: (email: string, password: string) => void;
 }
 
 interface HeadCell {
@@ -58,6 +60,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   setPage,
   page,
   roles,
+  handleLogin,
 }) => {
   const [order, setOrder] = React.useState<"asc" | "desc">("asc");
   const [orderBy, setOrderBy] = React.useState<keyof Facility>("name");
@@ -119,21 +122,27 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
           padding: "8px",
         }}
       >
-        {roles && roles.includes("Admin") && (
-          <Button
-            variant="contained"
-            size="small"
-            style={{
-              backgroundColor: "#FFFFFF",
-              color: "black",
-              fontWeight: "bold",
-            }}
-            onClick={createFacility}
-          >
-            Create <AddBusinessIcon style={{ paddingLeft: "5px" }} />
-          </Button>
-        )}
+        <div style={{ marginBottom: "8px" }}>
+          <Login onLogin={handleLogin} />
+        </div>
+        <div>
+          {roles && roles.includes("Admin") && (
+            <Button
+              variant="contained"
+              size="small"
+              style={{
+                backgroundColor: "#FFFFFF",
+                color: "black",
+                fontWeight: "bold",
+              }}
+              onClick={createFacility}
+            >
+              Create <AddBusinessIcon style={{ paddingLeft: "5px" }} />
+            </Button>
+          )}
+        </div>
       </div>
+
       <TableContainer
         style={{
           maxHeight: "500px",
