@@ -99,7 +99,7 @@ const facilityService = {
 
       if (response.ok) {
         const createdFacility = await response.json();
-        console.log("Created Facility:", createdFacility);
+        console.log("Created Facility");
         return createdFacility;
       } else {
         console.error("Failed to create facility");
