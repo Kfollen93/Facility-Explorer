@@ -1,8 +1,15 @@
 const BASE_URL = "https://localhost:5001/";
 
+interface UserData {
+  tokenType: string;
+  accessToken: string;
+  expiresIn: number;
+  refreshToken: string;
+}
+
 const authenticationService = {
   accessToken: "",
-  login: async (email: string, password: string): Promise<void> => {
+  login: async (email: string, password: string): Promise<UserData | null> => {
     const loginObj = {
       email,
       password,
@@ -20,11 +27,19 @@ const authenticationService = {
       if (response.ok) {
         const loggedIn = await response.json();
         authenticationService.accessToken = loggedIn.accessToken;
+        return {
+          tokenType: loggedIn.tokenType,
+          accessToken: loggedIn.accessToken,
+          expiresIn: loggedIn.expiresIn,
+          refreshToken: loggedIn.refreshToken,
+        };
       } else {
-        console.error("Failed to login");
+        console.error("Not a valid email and/or password.");
+        return null;
       }
     } catch (error) {
-      console.error("Error trying to login");
+      console.error("Error trying to login:", error);
+      return null;
     }
   },
 
