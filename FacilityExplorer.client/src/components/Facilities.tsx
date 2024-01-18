@@ -145,8 +145,18 @@ function Facilities() {
   };
 
   const handleLogin = async (email: string, password: string) => {
-    await authenticationService.login(email, password);
-    setRoles(await authenticationService.getRoles(email));
+    try {
+      // Attempt to log in
+      const loggedInUser = await authenticationService.login(email, password);
+
+      // If login is successful, set roles
+      if (loggedInUser) {
+        const roles = await authenticationService.getRoles(email);
+        setRoles(roles);
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
 
   const renderFilterButtons = () => {
