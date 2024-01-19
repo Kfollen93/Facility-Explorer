@@ -17,7 +17,7 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
   if (selectedFacilities.length === 0) return null;
   return (
     <div>
-      <h2>Selected Facilities</h2>
+      <h2 style={{ color: "#ccac8c" }}>Selected Facilities</h2>
       <div>
         <Paper
           elevation={3}
@@ -30,6 +30,7 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
             width: "600px",
             marginLeft: "340px",
             marginBottom: "20px",
+            backgroundColor: "#ccac8c",
           }}
         >
           <List style={{ flex: 1, width: "100%" }}>
@@ -41,19 +42,36 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
                   border: "1px solid #ddd",
                   borderRadius: "5px",
                   width: "100%",
+                  backgroundColor: "#f9f9f9",
                 }}
               >
                 <ListItemText
                   primary={`${facility.name} (${facility.typeOfFacility})`}
                 />
-                <Button onClick={() => removeSelectedFacility(facility.id)}>
+                <Button
+                  onClick={() => removeSelectedFacility(facility.id)}
+                  style={{ color: "#1eb3a4" }}
+                >
                   <DeleteIcon />
                 </Button>
               </ListItem>
             ))}
           </List>
         </Paper>
-        <button onClick={handleGeneratePDF}>Download Selected PDF</button>
+        <button
+          onClick={handleGeneratePDF}
+          style={{
+            backgroundColor: "#ccac8c",
+            color: "black",
+            fontWeight: "bold",
+            border: "none",
+            padding: "8px",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          Download Selected PDF
+        </button>
       </div>
     </div>
   );
