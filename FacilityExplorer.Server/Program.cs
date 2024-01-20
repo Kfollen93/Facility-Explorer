@@ -71,30 +71,22 @@ app.MapFallbackToFile("/index.html");
 // Seed Database
 using (var serviceScope = app.Services.CreateScope())
 {
-    // await PopulateDummyData(serviceScope);
+    await PopulateDummyData(serviceScope);
     await CreateRoles(serviceScope);
-    await CreateAdminAccount(serviceScope, app);
+    await CreateAdminAccount(serviceScope);
 }
 
 app.Run();
 
-static async Task CreateAdminAccount(IServiceScope serviceScope, WebApplication? app)
+static async Task CreateAdminAccount(IServiceScope serviceScope)
 {
     var configuration = serviceScope.ServiceProvider.GetRequiredService<IConfiguration>();
     var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
-    string email, password;
 
-    if (app!.Environment.IsDevelopment())
-    {
-        var adminCredentials = configuration.GetSection("AdminCredentials"); // appSettings.Development.json
-        email = adminCredentials["Email"]!;
-        password = adminCredentials["Password"]!;
-    }
-    else
-    {
-        email = Environment.GetEnvironmentVariable("AdminEmail")!;
-        password = Environment.GetEnvironmentVariable("AdminPassword")!;
-    }
+    var adminCredentials = configuration.GetSection("AdminCredentials");
+    string email = adminCredentials["Email"]!;
+    string password = adminCredentials["Password"]!;
+
 
     if (await userManager.FindByEmailAsync(email) == null)
     {

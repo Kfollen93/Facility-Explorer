@@ -32,16 +32,4 @@
     </ProjectReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="sqlite.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="sqlite.db-shm">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="sqlite.db-wal">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
