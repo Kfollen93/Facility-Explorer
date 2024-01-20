@@ -3,7 +3,6 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  /* background-color: #ffffff; */
   border-radius: 16px;
   padding-bottom: 3rem;
 }
@@ -23,9 +22,6 @@ td {
 
 body {
   background-color: rgb(256, 252, 244);
-  /* background-image: url("/images/subtlebg.png");
-  background-size: cover;
-  background-blend-mode: overlay; */
 }
 
 /* Media query for smaller screens */

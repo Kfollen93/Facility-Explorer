@@ -254,7 +254,9 @@ function Facilities() {
 
   return (
     <div>
-      <h2 id="tabelLabel">Facilities</h2>
+      <h2 style={{ color: "black" }} id="tabelLabel">
+        Facilities
+      </h2>
       <div style={{ marginBottom: "16px" }}>
         <TextField
           label="Search..."

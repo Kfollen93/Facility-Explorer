@@ -22,14 +22,14 @@ async function generatePDF(selectedFacilities: Facility[]) {
 
       // Section header styling
       doc.setTextColor("#2196F3"); // Blue
-      doc.setFont("_", "bold").setFontSize(20);
+      doc.setFont("times", "bold").setFontSize(20);
       doc.text(typeName, 10, yPosition);
       yPosition += 10;
 
       facilitiesOfType.forEach((facility) => {
         // Facility details styling
         doc.setTextColor("#000000");
-        doc.setFont("_", "normal").setFontSize(12);
+        doc.setFont("times", "normal").setFontSize(12);
         doc.text(`${facility.name}`, 20, yPosition);
         doc.text(
           `${facility.address.street}, ${facility.address.city}, ${facility.address.state} ${facility.address.zipcode}`,
