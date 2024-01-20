@@ -55,8 +55,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     <Container>
       <Button
         variant="contained"
-        color="primary"
         size="small"
+        style={{ backgroundColor: "#AC8CCC" }}
         onClick={() => setIsModalOpen(true)}
       >
         Admin Login
