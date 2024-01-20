@@ -17,7 +17,7 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
   if (selectedFacilities.length === 0) return null;
   return (
     <div>
-      <h2>Selected Facilities</h2>
+      <h2 style={{ color: "black" }}>Selected Facilities</h2>
       <div>
         <Paper
           elevation={3}
