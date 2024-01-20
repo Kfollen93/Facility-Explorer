@@ -42,7 +42,7 @@ export interface Facility {
   payment?: string;
 }
 
-const BASE_URL = "https://localhost:5001/api/";
+const BASE_URL = "https://facilityexplorer.azurewebsites.net/api/"; //"https://localhost:5001/api/"
 const GET = "GET";
 const DELETE = "DELETE";
 const PUT = "PUT";
