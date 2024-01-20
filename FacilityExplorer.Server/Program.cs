@@ -73,20 +73,28 @@ using (var serviceScope = app.Services.CreateScope())
 {
     // await PopulateDummyData(serviceScope);
     await CreateRoles(serviceScope);
-    await CreateAdminAccount(serviceScope);
+    await CreateAdminAccount(serviceScope, app);
 }
 
 app.Run();
 
-static async Task CreateAdminAccount(IServiceScope serviceScope)
+static async Task CreateAdminAccount(IServiceScope serviceScope, WebApplication? app)
 {
     var configuration = serviceScope.ServiceProvider.GetRequiredService<IConfiguration>();
     var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+    string email, password;
 
-    var adminCredentials = configuration.GetSection("AdminCredentials");
-    string email = adminCredentials["Email"]!;
-    string password = adminCredentials["Password"]!;
-
+    if (app!.Environment.IsDevelopment())
+    {
+        var adminCredentials = configuration.GetSection("AdminCredentials"); // appSettings.Development.json
+        email = adminCredentials["Email"]!;
+        password = adminCredentials["Password"]!;
+    }
+    else
+    {
+        email = Environment.GetEnvironmentVariable("AdminEmail")!;
+        password = Environment.GetEnvironmentVariable("AdminPassword")!;
+    }
 
     if (await userManager.FindByEmailAsync(email) == null)
     {
