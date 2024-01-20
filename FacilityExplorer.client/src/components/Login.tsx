@@ -59,7 +59,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         style={{ backgroundColor: "#AC8CCC" }}
         onClick={() => setIsModalOpen(true)}
       >
-        Admin Login
+        Admin
       </Button>
 
       <GenericModal

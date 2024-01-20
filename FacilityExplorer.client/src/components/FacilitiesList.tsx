@@ -279,6 +279,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
         </Table>
       </TableContainer>
       <TablePagination
+        style={{ fontWeight: "bold" }}
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
         count={sortedFacilities.length}
