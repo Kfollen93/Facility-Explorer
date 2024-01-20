@@ -1,7 +1,8 @@
 const isLocalhost = window.location.hostname === "localhost";
+// Note NO /api for authentication calls.
 const BASE_URL = isLocalhost
-  ? "https://localhost:5001/" // Note NO /api for authentication calls.
-  : "https://facilityexplorer.azurewebsites.net/api/";
+  ? "https://localhost:5001/"
+  : "https://facilityexplorer.azurewebsites.net/";
 
 interface UserData {
   tokenType: string;

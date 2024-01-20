@@ -43,8 +43,9 @@ export interface Facility {
 }
 
 const isLocalhost = window.location.hostname === "localhost";
+// Note add /api for facility calls.
 const BASE_URL = isLocalhost
-  ? "https://localhost:5001/api/" // Note /api/ for facility calls.
+  ? "https://localhost:5001/api/"
   : "https://facilityexplorer.azurewebsites.net/api/";
 const GET = "GET";
 const DELETE = "DELETE";
