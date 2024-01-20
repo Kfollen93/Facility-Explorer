@@ -42,7 +42,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(builder =>
     {
         builder
-        .WithOrigins("https://localhost:5173", "https://facilityexplorer.azurewebsites.net/")
+        .WithOrigins("https://localhost:5173", "https://facilityexplorer.azurewebsites.net")
         .WithHeaders("Content-Type", "Authorization")
         .WithMethods("GET", "POST", "PUT", "DELETE", "PATCH");
     });
