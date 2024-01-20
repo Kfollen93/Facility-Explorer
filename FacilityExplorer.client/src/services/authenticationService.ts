@@ -1,4 +1,4 @@
-const BASE_URL = "https://localhost:5001/";
+const BASE_URL = "https://facilityexplorer.azurewebsites.net/"; //"https://localhost:5001/"
 
 interface UserData {
   tokenType: string;
