@@ -512,3 +512,5 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sw?
+/FacilityExplorer.Server/sqlite.db-shm
+/FacilityExplorer.Server/sqlite.db-wal

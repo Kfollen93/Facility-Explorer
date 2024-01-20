@@ -71,12 +71,10 @@ app.MapFallbackToFile("/index.html");
 // Seed Database
 using (var serviceScope = app.Services.CreateScope())
 {
-    await PopulateDummyData(serviceScope);
+    // await PopulateDummyData(serviceScope);
     await CreateRoles(serviceScope);
     await CreateAdminAccount(serviceScope);
 }
-
-
 
 app.Run();
 

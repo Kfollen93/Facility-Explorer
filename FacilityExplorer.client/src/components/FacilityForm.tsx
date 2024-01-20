@@ -67,7 +67,7 @@ const FacilityForm: React.FC<FacilityFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit}>
-      <div style={{ textAlign: "center" }}>
+      <div style={{ textAlign: "center", color: "black" }}>
         {isEditing ? <h2>Edit a Facility</h2> : <h2>Create a Facility</h2>}
       </div>
       <Grid container spacing={2}>

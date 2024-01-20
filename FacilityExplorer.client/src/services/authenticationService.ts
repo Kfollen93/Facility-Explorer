@@ -1,4 +1,7 @@
-const BASE_URL = "https://facilityexplorer.azurewebsites.net/"; //"https://localhost:5001/"
+const isLocalhost = window.location.hostname === "localhost";
+const BASE_URL = isLocalhost
+  ? "https://localhost:5001/" // Note NO /api for authentication calls.
+  : "https://facilityexplorer.azurewebsites.net/api/";
 
 interface UserData {
   tokenType: string;
