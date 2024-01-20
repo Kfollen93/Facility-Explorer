@@ -17,7 +17,7 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
   if (selectedFacilities.length === 0) return null;
   return (
     <div>
-      <h2 style={{ color: "#ccac8c" }}>Selected Facilities</h2>
+      <h2>Selected Facilities</h2>
       <div>
         <Paper
           elevation={3}
@@ -62,7 +62,7 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
           onClick={handleGeneratePDF}
           style={{
             backgroundColor: "#ccac8c",
-            color: "black",
+            color: "#FFFFFF",
             fontWeight: "bold",
             border: "none",
             padding: "8px",
