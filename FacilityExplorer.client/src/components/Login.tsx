@@ -17,7 +17,14 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   const renderModalContent = () => (
-    <Paper elevation={3} style={{ padding: "20px", textAlign: "center" }}>
+    <Paper
+      elevation={3}
+      style={{
+        padding: "20px",
+        textAlign: "center",
+        backgroundColor: "#fffcf4",
+      }}
+    >
       <h2>Admin Login</h2>
       <form>
         <TextField
@@ -40,6 +47,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <Button
+          style={{ backgroundColor: "#AC8CCC" }}
           variant="contained"
           color="primary"
           fullWidth
@@ -61,11 +69,11 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       >
         Admin
       </Button>
-
       <GenericModal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         anyComponent={renderModalContent()}
+        backgroundColor="#ccac8c"
       />
     </Container>
   );
