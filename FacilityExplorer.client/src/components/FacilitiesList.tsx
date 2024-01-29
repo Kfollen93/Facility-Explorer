@@ -11,6 +11,7 @@ import {
   TableSortLabel,
   TablePagination,
   Link,
+  Tooltip,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -215,7 +216,11 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
                         </Link>
                       ) : headCell.id === "description" &&
                         facility.description.length > 30 ? (
-                        <span>{facility.description.substring(0, 30)}...</span>
+                        <Tooltip title={facility.description} arrow>
+                          <span>
+                            {facility.description.substring(0, 30)}...
+                          </span>
+                        </Tooltip>
                       ) : headCell.id === "phoneNumber" ? (
                         formatPhoneNumber(facility[headCell.id] as string)
                       ) : (
