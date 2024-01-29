@@ -8,7 +8,7 @@ Facility Explorer simplifies the research and requirements for mental health pro
 
 Mental health professionals have the option to log in with an admin account, granting them full CRUD (Create, Read, Update, Delete) access to the application. The primary goal is to provide accessible, up-to-date information as a public resource, actively managed by mental health professionals for their daily use.
 
-_Note: Facility Explorer is tailored for Washington state, initially conceived by a Social Worker working in the Greater Seattle Area._
+_Note: Facility Explorer is tailored for Washington state, initially conceived by a Social Worker working in the Greater Seattle Area. The website currently includes seeded data to showcase its features. This data is intended to demonstrate the functionality of Facility Explorer and its potential as a valuable tool for mental health professionals."_
 
 ## Key Features
 
@@ -41,8 +41,6 @@ _Note: Facility Explorer is tailored for Washington state, initially conceived b
     - Skilled Nursing Facilities (SNF)
     - Long Term Care (LTC)
     - Mental Health (MH)
-
-These key features make Facility Explorer a comprehensive tool, offering public access, personalization, and specialized categorization to meet the needs of mental health professionals in Washington state.
 
 ## Developer Tools
 
