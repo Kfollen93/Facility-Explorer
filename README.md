@@ -1,6 +1,7 @@
 # Facility Explorer
 
-The website is hosted via Azure Free Tier and can be accessed here: <b>[Facility Explorer](https://facilityexplorer.azurewebsites.net/)</b>.
+The website is hosted via Azure and can be accessed here: <b><a href="https://facilityexplorer.azurewebsites.net/" target="_blank">Facility Explorer</a>
+</b>.
 
 ## Overview
 
@@ -8,7 +9,7 @@ Facility Explorer simplifies the research and requirements for mental health pro
 
 Mental health professionals have the option to log in with an admin account, granting them full CRUD (Create, Read, Update, Delete) access to the application. The primary goal is to provide accessible, up-to-date information as a public resource, actively managed by mental health professionals for their daily use.
 
-_Note: Facility Explorer is tailored for Washington state, initially conceived by a Social Worker working in the Greater Seattle Area. The website currently includes seeded data to showcase its features. This data is intended to demonstrate the functionality of Facility Explorer and its potential as a valuable tool for mental health professionals."_
+_Note: Facility Explorer is tailored for Washington state, initially conceived by a Social Worker working in the Greater Seattle Area. The website currently includes seeded data to showcase its features. This data is intended to demonstrate the functionality of Facility Explorer and its potential as a valuable tool for mental health professionals._
 
 ## Key Features
 
