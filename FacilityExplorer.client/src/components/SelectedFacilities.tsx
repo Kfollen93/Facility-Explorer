@@ -27,8 +27,8 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
             padding: "10px",
             border: "1px solid #ccc",
             borderRadius: "5px",
-            width: "600px",
-            marginLeft: "340px",
+            width: "400px",
+            marginLeft: "428px",
             marginBottom: "20px",
             backgroundColor: "#ccac8c",
           }}
@@ -43,6 +43,7 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
                   borderRadius: "5px",
                   width: "100%",
                   backgroundColor: "#f9f9f9",
+                  textAlign: "center",
                 }}
               >
                 <ListItemText
@@ -65,9 +66,10 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
             color: "#FFFFFF",
             fontWeight: "bold",
             border: "none",
-            padding: "8px",
+            padding: "10px",
             borderRadius: "5px",
             cursor: "pointer",
+            marginTop: "5px",
           }}
         >
           Download Selected PDF
