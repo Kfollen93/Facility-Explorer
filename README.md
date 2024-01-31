@@ -1,7 +1,6 @@
 # Facility Explorer
 
-The website is hosted via Azure and can be accessed here: <b><a href="https://facilityexplorer.azurewebsites.net/" target="_blank">Facility Explorer</a>
-</b>.
+The website is hosted via Azure and can be accessed here: <strong><a href="https://facilityexplorer.azurewebsites.net/" target="_blank">Facility Explorer</a></strong>.
 
 ## Overview
 
