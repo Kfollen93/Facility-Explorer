@@ -81,3 +81,17 @@ _Note: Facility Explorer is tailored for Washington state, initially conceived b
 - **TypeScript**
 - **Material UI**
 - **Vite**
+
+<p align="center"><strong>Admin Interface Preview</strong></p>
+
+<p align="center">
+  <img src="./readme_images/adminscreen.png" alt="Admin Screen" width="800" height="500"/>
+</p>
+
+<p align="center"><i>Full CRUD access upon successful Admin login.</i></p>
+
+<p align="center">
+  <img src="./readme_images/createfacility.png" alt="Create Facility" width="800" height="600"/>
+</p>
+
+<p align="center"><i>Example showing modal pop up for creating a facility.</i></p>
