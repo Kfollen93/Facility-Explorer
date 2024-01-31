@@ -23,13 +23,13 @@ const SelectedFacilitiesList: React.FC<SelectedFacilitiesProps> = ({
           elevation={3}
           style={{
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             padding: "10px",
             border: "1px solid #ccc",
             borderRadius: "5px",
-            width: "400px",
-            marginLeft: "428px",
-            marginBottom: "20px",
+            width: "30%",
+            margin: "20px auto",
             backgroundColor: "#ccac8c",
           }}
         >
