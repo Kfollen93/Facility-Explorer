@@ -85,7 +85,7 @@ const FacilitiesList: React.FC<FacilitiesListProps> = ({
   };
 
   const filteredFacilities = React.useMemo(() => {
-    if (!facilities) return [];
+    if (!Array.isArray(facilities)) return [];
     return facilities.filter((facility) =>
       Object.values(facility).some(
         (value) =>
