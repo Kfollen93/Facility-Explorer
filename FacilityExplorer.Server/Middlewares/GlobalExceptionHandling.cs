@@ -17,7 +17,7 @@ namespace FacilityExplorer.Server.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
+                _logger.LogError($"Exception: {ex.Message}, StackTrace: {ex.StackTrace}");
                 context.Response.ContentType = "application/json";
 
                 switch (ex)
