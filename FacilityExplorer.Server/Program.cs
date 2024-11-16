@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using FacilityExplorer.Server.Repositories.UserManagementRepository;
+using Microsoft.Extensions.Logging.AzureAppServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,15 @@ builder.Services.AddScoped<IUserManagementRepository, UserManagementRepository>(
 
 builder.Services.AddTransient<GlobalExceptionHandling>();
 builder.Services.AddLogging();
+
+// Azure App Service Logging - *Toggle on "Application logging (Filesystem)" in Azure for usage.*
+builder.Services.Configure<AzureFileLoggerOptions>(options =>
+{
+    options.FileName = "log-";
+    options.FileSizeLimit = 50 * 1024;
+    options.RetainedFileCountLimit = 5;
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
